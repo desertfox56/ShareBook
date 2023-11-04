@@ -1,0 +1,28 @@
+
+Header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    z-index: 1; 
+    margin-bottom: 64px;
+    /*background-color: #36cfc9;*/
+}
+.Logo{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 4%; 
+}
+
+.Nav{
+    display: flex;
+    flex: 2;
+    justify-content: start;
+    
+}
+.Nav a{
+    color: #3da3ec;
+}
