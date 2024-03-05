@@ -1,0 +1,49 @@
+.custom-card {
+    display: flex;
+    flex-direction: column; /* Расположение в столбец */
+    justify-content: space-between; /* Распределение пространства между элементами */
+    height: 100%; /* Задаем высоту карточки */
+    
+  }
+  
+  .custom-card .ant-card-body {
+    flex-grow: 1; /* Контент карточки занимает все доступное пространство */
+    display: flex;
+    flex-direction: column; /* Расположение в столбец */
+    justify-content: space-between; /* Распределение пространства между содержимым и действиями */
+  }
+  
+  .custom-card .ant-card-actions {
+    margin-top: auto; /* Отодвигаем действия вниз */
+  }
+  
+  .custom-card2 {
+    display: flex;
+    flex-direction: column; /* Расположение в столбец */
+    justify-content: space-between; /* Распределение пространства между элементами */
+    height: 100%; /* Задаем высоту карточки */
+    
+  }
+  
+  .custom-card2 .ant-card-body {
+    flex-grow: 1; /* Контент карточки занимает все доступное пространство */
+    display: flex;
+    flex-direction: column; /* Расположение в столбец */
+    justify-content: space-between; /* Распределение пространства между содержимым и действиями */
+  }
+  
+  .custom-card2 .ant-card-actions {
+    margin-top: auto; /* Отодвигаем действия вниз */
+  }
+  
+.Row{
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.Row2{
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 50%;
+}
+

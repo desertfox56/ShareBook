@@ -1,0 +1,24 @@
+.Filter{
+    margin-top: 20px; /* Если нужен верхний отступ */
+    padding: 20px; 
+    background-color: #8ec0c6;
+    border-radius: 1%;
+    
+    
+}
+/*.Filter .ant-typography {
+    text-align: center; 
+  }
+*/
+.Filter Button{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    background-color: #F2B705;
+    width: 100%;
+}
+
+
+.Row{
+    margin-bottom: 50px;
+    margin-top: 50px;
+}

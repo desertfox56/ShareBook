@@ -1,0 +1,18 @@
+.marketplace-container {
+    display: flex;
+    align-items: flex-start; /* Выровнять содержимое по верху */
+  }
+  
+  .filter-container {
+    width: 300px; /* Фиксированная ширина фильтра */
+    position: sticky;
+    top: 10px; /* Расстояние от верха страницы */
+    flex-shrink: 0; /* Предотвратить сжатие */
+    background-color: #8ec0c6; /* Ваш цвет фона */
+  }
+  
+  .cards-container {
+    flex-grow: 1; /* Занимает оставшееся пространство */
+    padding-left: 20px; /* Отступ от фильтра */
+  }
+  

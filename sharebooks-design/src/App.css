@@ -1,0 +1,20 @@
+
+
+.App {
+  text-align: left;
+  background-color: #F2F2F2;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.content-with-fixed-header {
+  padding-top: 164px;
+}
+.AppFooter{
+  background-color: #1797A6;
+  color: #0D0D0D;
+}
+
+
