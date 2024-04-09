@@ -30,7 +30,7 @@ const UserProfile = () => {
         };
 
         // Формируем URL для запроса данных профиля пользователя
-        const userProfileUrl = `http://localhost:8000/users/user_profile/${userId}/`;
+        const userProfileUrl = `http://localhost:8000/api/users/user_profile/${userId}/`;
 
         // Отправляем запрос на сервер для получения данных пользователя
         const response = await axios.get(userProfileUrl, { headers });
@@ -50,7 +50,7 @@ const UserProfile = () => {
     <div>
       {userData ? (
         <div>
-          <Typography.Title level={2}> User Profile
+          <Typography.Title level={2}> User Profile <br></br>
       {`${userData.first_name} ${userData.second_name} ${userData.patronymic}`} 
     </Typography.Title>
     <Typography.Paragraph>Email: {userData.email}</Typography.Paragraph>

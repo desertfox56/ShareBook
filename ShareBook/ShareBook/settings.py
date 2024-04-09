@@ -98,8 +98,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ShareBook',
         'USER': 'postgres',
-        'PASSWORD': 'haRulfwwfOhO0k',
-        'HOST': 'localhost',
+        'PASSWORD': 'h%aRulfwwfOhO0k',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -241,3 +241,12 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  # для использования TLS, 465 для SSL
+EMAIL_USE_TLS = True  
+EMAIL_USE_SSL = False  
+EMAIL_HOST_USER = 'alexej.ivanov1084736@gmail.com'
+EMAIL_HOST_PASSWORD = 'agyi wuxr nckw yybm'

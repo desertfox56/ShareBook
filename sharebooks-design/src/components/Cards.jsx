@@ -36,7 +36,7 @@ const Cards =()=>{
         const headers = {
           Authorization: `JWT ${token}`,
         };
-            const response = await axios.get('http://localhost:8000/marketplace/allbooks/',{ headers });
+            const response = await axios.get('http://localhost:8000/api/marketplace/allbooks/',{ headers });
             setBooks(response.data);
             
         } catch (error) {

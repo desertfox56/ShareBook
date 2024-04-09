@@ -20,7 +20,7 @@ const ModalForm = ({ selectedBook, isOpen, setIsOpen }) =>{
         }
         const headers = { Authorization: `JWT ${token}` };
         const selectedBookId = selectedBook ? selectedBook.id : null;
-        const PurchaseUrl = `http://localhost:8000/myBooks/purchase/${selectedBookId}/`;
+        const PurchaseUrl = `http://localhost:8000/api/myBooks/purchase/${selectedBookId}/`;
         const response = await axios.post(PurchaseUrl, {}, { headers });
         setUserData(response.data);
     } catch (error) {

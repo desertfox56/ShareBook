@@ -12,7 +12,7 @@ const BookItem = ({ book }) => {
       const bookId = localStorage.getItem('selectedBookID'); // Get bookID from localStorage
       if (bookId) {
         try {
-          const response = await axios.get(`http://localhost:8000/marketplace/book/${bookId}/`);
+          const response = await axios.get(`http://localhost:8000/api/marketplace/book/${bookId}/`);
           // Handle response data
           console.log(response.data); // Example action
         } catch (error) {

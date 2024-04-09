@@ -15,7 +15,7 @@ from rest_framework import generics
 import logging
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-
+from django.core.mail import send_mail
 logger = logging.getLogger(__name__)
 
 
@@ -89,3 +89,53 @@ class UserProfileView(generics.RetrieveAPIView):
     def get_object(self):
         # Попытка получить пользователя по id, если пользователь не найден, будет возвращена ошибка 404
         return get_object_or_404(User, id=self.kwargs['pk'])
+'''
+class ResetPassword(APIView):
+    def post(self,request):
+        data = request.data
+        email = data['email']
+        user = User.objects.get(email=email)
+        if User.objects.filter(email=email).exists():
+        # send email with otp
+            send_mail(
+        'Subject here',
+        f'Here is the message with {user.otp}.',
+        'from@example.com',
+            [user.email],
+            fail_silently=False,
+        )
+            message = {
+            'detail': 'Success Message'}
+            return Response(message, status=status.HTTP_200_OK)
+        else:
+            message = {
+            'detail': 'Some Error Message'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    def put(request):
+    """reset_password with email, OTP and new password"""
+    data = request.data
+    user = CustomUser.objects.get(email=data['email'])
+    if user.is_active:
+        # Check if otp is valid
+        if data['otp'] == user.opt:
+            if new_password != '':
+                # Change Password
+                user.set_password(data['password'])
+                user.save() # Here user otp will also be changed on save automatically 
+                return Response('any response or you can add useful information with response as well. ')
+            else:
+                message = {
+                    'detail': 'Password cant be empty'}
+                return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            message = {
+                'detail': 'OTP did not matched'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        message = {
+            'detail': 'Something went wrong'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+'''

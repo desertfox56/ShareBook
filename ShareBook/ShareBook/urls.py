@@ -19,10 +19,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('users/',include('users.urls')),
-    path('marketplace/',include('marketplace.urls')),
-    path('myBooks/',include('myBooks.urls')),
+    #Админка:http://localhost:8000/api/admin/
+    path('api/admin/', admin.site.urls),
+    path('api/users/',include('users.urls')),
+    path('api/marketplace/',include('marketplace.urls')),
+    path('api/myBooks/',include('myBooks.urls')),
     
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
