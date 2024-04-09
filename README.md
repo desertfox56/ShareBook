@@ -1,48 +1,48 @@
 # ShareBooks
 ShareBooks is  online library platform allowing users to share books with one another.
-# Stack
+## Stack
 Backend: Django (Python)
 Frontend: React.js
 Database: PostgreSQL
 Containerization: Docker
 Web-Server: Nginx
 Version Control: Git & GitHub
-# Steps to start
+## Steps to start
 1. Cloning a repository
 
-git clone https://github.com/desertfox56/ShareBooks.git
+``git clone https://github.com/desertfox56/ShareBooks.git``
 
 2. Running using Docker
 
-docker-compose up --build
+``docker-compose up --build``
 
 This command will build and run all the necessary containers (Django, React, PostgreSQL).
 
 3. Running without Docker
 Backend:
 
-cd ShareBook
-pip install -r requirements.txt
-python manage.py runserver
+``cd ShareBook``
+``pip install -r requirements.txt``
+``python manage.py runserver``
 
 Frontend:
 
-cd sharebooks-design
-npm install
-npm start
+``cd sharebooks-design``
+``npm install``
+``npm start``
 
-4. Project structure
-│   ├── ShareBook -Backend part of site
+4. ## Project structure
+│   ├── ShareBook **Backend part of site**
 ├── ShareBook
 │   │   ├── __init__.py
 │   │   ├── asgi.py
-│   │   ├── settings.py -Settings of Django app
+│   │   ├── settings.py **Settings of Django app**
 │   │   ├── urls.py
 │   │   └── wsgi.py   
 │   ├── db
 │   │   ├── password.txt
 │   │   └── password.txt.txt
-│   ├── marketplace -Django app for the marketplace functionality
+│   ├── marketplace **Django app for the marketplace functionality**
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
@@ -54,7 +54,7 @@ npm start
 │   │   ├── books
 │   │   │   └── Don_Quixote.jpg
 │   │   └── Don_Quixote.jpg
-│   ├── myBooks -Django app for user's book collections, including models and API serializers
+│   ├── myBooks **Django app for user's book collections, including models and API serializers**
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
@@ -63,10 +63,10 @@ npm start
 │   │   ├── tests.py
 │   │   ├── urls.py
 │   │   └── views.py
-│   ├── nginx - Contains Nginx configuration files for web server setup
+│   ├── nginx  **Contains Nginx configuration files for web server setup**
 │   │   └── nginx.conf
 │   ├── static
-│   ├── users - Django app for user authorization and registration
+│   ├── users **Django app for user authorization and registration**
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
@@ -77,13 +77,13 @@ npm start
 │   │   ├── urls.py
 │   │   └── views.py
 │   ├── .dockerignore
-│   ├── Dockerfile -Django settings for Docker
+│   ├── Dockerfile **Django settings for Docker**
 │   ├── README.md
-│   ├── compose.yaml -Project settings for Docker
+│   ├── compose.yaml **Project settings for Docker**
 │   ├── manage.py
-│   └── requirements.txt - Specifies Python package dependencies for the project
-├── sharebooks-design -Frontend part of site
-│   ├── build -Compiled and ready-to-deploy frontend static files
+│   └── requirements.txt **Specifies Python package dependencies for the project**
+├── sharebooks-design **Frontend part of site**
+│   ├── build **Compiled and ready-to-deploy frontend static files**
 │   │   ├── static
 │   │   │   ├── css
 │   │   │   │  
@@ -98,14 +98,14 @@ npm start
 │   │   ├── logo512.png
 │   │   ├── manifest.json
 │   │   └── robots.txt
-│   ├── public -Contains the static files used by the React app before it's built
+│   ├── public **Contains the static files used by the React app before it's built**
 │   │   ├── favicon.ico
 │   │   ├── index.html
 │   │   ├── logo192.png
 │   │   ├── logo512.png
 │   │   ├── manifest.json
 │   │   └── robots.txt
-│   ├── src -Source files for the React application, including components and pages
+│   ├── src **Source files for the React application, including components and pages**
 │   │   ├── assets
 │   │   │   ├── css
 │   │   │   │   ├── Cards.css
@@ -156,10 +156,10 @@ npm start
 │   │   │   ├── SuccessPage.jsx
 │   │   │   └── marketplace.jsx
 │   │   ├── App.css
-│   │   ├── App.js -Root React component
+│   │   ├── App.js **Root React component**
 │   │   ├── App.test.js
 │   │   ├── index.css
-│   │   ├── index.js -Entry point for the React application
+│   │   ├── index.js **Entry point for the React application**
 │   │   ├── logo.svg
 │   │   ├── reportWebVitals.js
 │   │   └── setupTests.js
