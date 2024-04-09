@@ -1,37 +1,82 @@
 # ShareBooks
-ShareBooks is  online library platform allowing users to share books with one another.
+ShareBooks is an online library platform that allows users to share books with one another.
+
+
 ## Stack
-Backend: Django (Python)
-Frontend: React.js
-Database: PostgreSQL
-Containerization: Docker
-Web-Server: Nginx
-Version Control: Git & GitHub
-## Steps to start
-1. # Cloning a repository
+| Component       | Technology       |
+| :---:           | :---:            |
+| Backend         | Django (Python)  |
+| Frontend        | React.js         |
+| Database        | PostgreSQL       |
+| Containerization| Docker           |
+| Web-Server      | Nginx            |
+| Version Control | Git & GitHub     |
 
-``git clone https://github.com/desertfox56/ShareBooks.git``
 
-2. # Running using Docker
+<br />
 
-``docker-compose up --build``
+# Getting Started
+
+## Cloning a repository
+
+```bash
+git clone https://github.com/desertfox56/ShareBooks.git
+```
+
+<br />
+
+
+## Running using Docker
+
+```bash
+docker-compose up --build
+```
 
 This command will build and run all the necessary containers (Django, React, PostgreSQL).
 
-3. # Running without Docker
-Backend:
 
-``cd ShareBook``
-``pip install -r requirements.txt``
-``python manage.py runserver``
 
-Frontend:
+<br />
 
-``cd sharebooks-design``
-``npm install``
-``npm start``
+## Running without Docker
 
-4. ## Project structure
+
+### Backend
+
+```
+cd ShareBook
+```
+
+```
+pip install -r requirements.txt
+```
+
+```
+python manage.py runserver
+```
+
+
+### Frontend
+
+```
+cd sharebooks-design
+```
+
+```
+npm install
+```
+
+```
+npm start
+```
+
+
+
+<br />
+
+
+<details>
+<summary><h2>Project Structure</h2></summary>
 
 ```
 ShareBooks/
@@ -166,3 +211,6 @@ ShareBooks/
 ├── README.md
 └── docker-compose.yml
 ```
+  
+</details>
+
