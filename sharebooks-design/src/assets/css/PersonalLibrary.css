@@ -1,0 +1,29 @@
+/*Когда буду перерабатывать дизайн и контент карусели, надо будет подумать над допустимостью -margin*/
+.SearchBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-bottom: 2%;
+    margin-right: 3%;
+    margin-top: -38%;
+}
+.all-books-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-bottom: 2%;
+    margin-right: 3%;
+}
+.Filter_library{
+    width: 24%;
+    margin-left: 3%;
+}
+.Page_name{
+    text-align: center;
+    width: 100%;
+}
+.popular-books-section {
+    margin-left: 31%;
+    width: 60%;
+    
+}

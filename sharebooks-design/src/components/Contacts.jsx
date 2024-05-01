@@ -18,8 +18,9 @@ const validateMessages = {
 
 function AppContacts(){
     return(
-        <Form name="trigger" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off">
-    <Alert message="Напишите нам, если остались вопросы" />
+      <div className='Contacts'>
+        <Form name="trigger"  layout="vertical" autoComplete="off" className='ContactsForm'>
+    <Alert message="Напишите нам, если остались вопросы" style={{marginBottom:'2%'}} />
 
     {/*<Form.Item
       hasFeedback
@@ -62,8 +63,8 @@ function AppContacts(){
     </Form.Item>
 
     
-      <Button type="primary" htmlType="submit">
-        Submit
+      <Button type="primary"  htmlType="submit">
+        Отправить
       </Button>
     
     {/*<Form.Item
@@ -75,7 +76,7 @@ function AppContacts(){
     >
       <Input placeholder="Validate one by one" />
   </Form.Item>*/}
-  </Form>
+  </Form></div>
     );
 }
 

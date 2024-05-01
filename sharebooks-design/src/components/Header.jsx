@@ -26,7 +26,7 @@ function AppHeader() {
                     <Link to="Marketplace/">Наши книги</Link>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <a href="/home">Наши проекты</a>
+                    <Link to="OurProjects/">Наши проекты</Link>
                 </Menu.Item>
                 <Menu.Item key="4">
                     <Link to="contacts/">Контакты</Link>

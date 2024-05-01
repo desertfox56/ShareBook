@@ -29,12 +29,14 @@ class TransferBookView(APIView):
     def post(self, request, *args, **kwargs):
         # Получаем данные из запроса
         giver_user_id = request.data.get('giver_user_id')
-        receiver_user_id = request.data.get('receiver_user_id')
+        #receiver_user_id = request.data.get('receiver_user_id')
+        receiver_user_email = request.data.get('receiver_user_email')
         book_id = request.data.get('book_id')
 
         # Получаем объекты или возвращаем 404, если не найдены
         giver_user = get_object_or_404(User, id=giver_user_id)
-        receiver_user = get_object_or_404(User, id=receiver_user_id)
+        #receiver_user = get_object_or_404(User, id=receiver_user_id)
+        receiver_user = get_object_or_404(User, email=receiver_user_email)
         book = get_object_or_404(Book, id=book_id)
 
         try:

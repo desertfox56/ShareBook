@@ -22,6 +22,8 @@ services:
   server:
     build:
       context: .
+    environment:
+      - TZ=Europe/Moscow
     ports:
       - 8000:8000
     depends_on:
@@ -33,6 +35,8 @@ services:
 
   nginx:
     image: nginx:1.25.4  # Использование официального образа Nginx
+    environment:
+      - TZ=Europe/Moscow
     ports:
       - "80:80"
     depends_on:
@@ -41,14 +45,20 @@ services:
       - static_volume:/app/static
       - media_volume:/app/media
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro # Проброс директории с конфигом NGINX
+  #Исправить настройку Реакт, открывается неверный порт.
   react:
     build:
       context: ../sharebooks-design
       dockerfile: Dockerfile
+    environment:
+      - TZ=Europe/Moscow
     volumes:
-      - ./sharebooks-design:/app  # монтирование локальной папки для hot reload
+      - ../sharebooks-design:/app  # монтирование локальной папки для hot reload
+      
     ports:
-      - "3000:80"
+     # - "3000:80"
+      - "3000:3000"
+    #command: npm start
     depends_on:
       - server
 
@@ -61,8 +71,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: ShareBook
-      POSTGRES_PASSWORD: 'h%aRulfwwfOhO0k'
+      - TZ=Europe/Moscow
+      - POSTGRES_DB=ShareBook
+      - POSTGRES_PASSWORD='h%aRulfwwfOhO0k'
     expose:
       - 5432
     healthcheck:

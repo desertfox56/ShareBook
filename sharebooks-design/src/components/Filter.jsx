@@ -126,7 +126,7 @@ function Filter() {
       <Title level={4}>Возраст</Title>
       <Slider range={{ draggableTrack: true }} defaultValue={[18, 50]} style={{ width: '30%' }} />
 
-      <Button icon={<SearchOutlined />}>Search</Button>
+      <Button icon={<SearchOutlined />}>Найти</Button>
     </div>
   );
 }

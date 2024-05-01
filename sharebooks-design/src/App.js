@@ -14,6 +14,10 @@ import PersonalLibrary from './pages/PersonalLibrary.jsx';
 import Settings from './pages/Settings.jsx';
 import BookReadingPage from './pages/ReadingPage.jsx';
 import PurchasePage from './pages/PurchasePage.jsx';
+import OurProjectPage from './pages/OurProjects.jsx';
+import ResetPasswordForm from './pages/ResetPasswordPage.jsx';
+import PaymentPage from './pages/PaymentPage.jsx';
+import WishPage from './pages/WishPage.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -26,10 +30,8 @@ function App() {
        </Route>
         {/* <Route path="/" element={<AppHeader />} /> */}
         {/* другие маршруты */}
-        <Route path='contacts/' element={<ContactsPage/>}>
-
-        </Route>
-
+        <Route path='contacts/' element={<ContactsPage/>}></Route>
+        <Route path='OurProjects/' element={<OurProjectPage/>}></Route>
         <Route path='FAQ/' element={<FAQPage/>}> </Route>
         <Route path='login/' element={<LogIn/>}></Route>
         <Route path='Registration/' element={<Registration/>}></Route>
@@ -40,6 +42,9 @@ function App() {
         <Route path='Settings/' element={<Settings/>}></Route>
         <Route path='Reading/' element={<BookReadingPage/>}></Route>
         <Route path='Purchase/' element={<PurchasePage/>}></Route>
+        <Route path='Reset_password/' element={<ResetPasswordForm/>}></Route>
+        <Route path='PaymentPage/' element={<PaymentPage/>}></Route>
+        <Route path='WishPage/' element={<WishPage/>}></Route>
       </Routes>
       </div>
       <AppFooter />

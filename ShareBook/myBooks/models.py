@@ -6,6 +6,9 @@ class UserBook(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ('book', 'user')  # Adding a unique constraint
+
 class BookTransfer(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     giver_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='given_transfers')

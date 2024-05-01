@@ -1,6 +1,7 @@
 .marketplace-container {
     display: flex;
     align-items: flex-start; /* Выровнять содержимое по верху */
+    margin-right: 2%;
   }
   
   .filter-container {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalForm from '../components/ModalForm';
+import ModalForm from '../components/ModalFormPurchase';
 function PurchasePage(){
     return(
         <div className='Purchase'>

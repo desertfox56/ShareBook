@@ -1,8 +1,8 @@
 import React from 'react';
 import Intro from '../components/Intro.jsx';
-import AppHeader from '../components/Header.jsx';
-import AppFooter from '../components/Footer.jsx';
 import About_us from '../components/About_us.jsx';
+import '../assets/css/HomePage.css';
+//В intro подумать над тем, что надписи под картинками слишком далеко
 function HomePage(){
     return(
         <div className="Home">

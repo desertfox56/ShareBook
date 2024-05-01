@@ -40,7 +40,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     patronymic = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True) # Статус активации
     is_staff = models.BooleanField(default=False) # Статус админа
-    
+    otp = models.CharField(max_length=6, blank=True, null=True)
+    otp_created_at = models.DateTimeField(blank=True, null=True)
+    totp_secret = models.CharField(
+        max_length=100,  # Adjust length as needed to accommodate the Base32 encoded key
+        blank=True, null=True
+    )
     USERNAME_FIELD = 'email' # Идентификатор для обращения 
     
  
@@ -54,6 +59,4 @@ class UserToken(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     token = models.TextField()
     
-class BlacklistedToken(models.Model):
-    token = models.CharField(max_length=255, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+

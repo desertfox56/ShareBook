@@ -12,9 +12,10 @@ function SearchBar(){
     return(
         <Search
       placeholder="Введите запрос"
-      enterButton={<Button type="primary" icon={<SearchOutlined />}>Search</Button>}
-      size="large"
+      enterButton={<Button type="primary" icon={<SearchOutlined />}>Поиск</Button>}
+      size="middle"
       onSearch={handleSearch}
+      style={{width:'30%'}}
     />
     );
 }

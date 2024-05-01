@@ -13,10 +13,11 @@ function Section({ imageSrc, headingText, children }) {
             src={imageSrc}
             fallback="https://via.placeholder.com/150"
             alt="ShareBook About us"
+            style={{ display: 'block', margin: '0 auto' }}
           />
         </Col>
-        <Col flex="auto">
-          <Title level={4}>{headingText}</Title>
+        <Col span={24}>
+          <Title level={4} style={{ textAlign: 'center' }}>{headingText}</Title>
           {typeof children === "string" ? <Text>{children}</Text> : children}
         </Col>
       </Row>
@@ -35,7 +36,7 @@ function About_us() {
           alt="ShareBook Logo"
           style={{ marginRight: '4rem' }}
         />
-        <Title level={2} style={{ marginTop: '1rem', textAlign: 'center' }}>Добро пожаловать в ShareBook!</Title>
+        <Title level={2} style={{ marginTop: '1rem', marginLeft:'1rem', textAlign: 'center' }}>Добро пожаловать в ShareBook!</Title>
       </Row>
       <Row gutter={32} justify="center">
         <Section imageSrc="logo.svg" headingText="Ваша персональная онлайн-библиотека.">

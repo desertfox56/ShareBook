@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import { Link,useNavigate } from 'react-router-dom';
 import {
   AutoComplete,
   Button,
@@ -41,6 +42,7 @@ const validateMessages = {
   /* eslint-enable no-template-curly-in-string */
 
 function Registration(){
+  const navigate=useNavigate();
  const onFinish = async (values) => {
 
     console.log('Form values:', values); // Добавляем эту строку
@@ -64,6 +66,7 @@ function Registration(){
       
           // Выводим алерт об успешной регистрации
           alert('Registration successful!');
+          navigate('/login');
         } else {
           // Обработка ошибок при регистрации
           console.error('Registration failed:', response.status, response.data);
@@ -102,60 +105,60 @@ function Registration(){
         <Form.Item 
           label="E-mail"
           name={[ 'email']}
-          rules={[{ required: true, message: 'Please input your email',type: 'email' }]}
+          rules={[{ required: true, message: 'Пожалуйста введите свою почту!',type: 'email' }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Пароль"
           name={[ 'password']}
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
         >
           <Input.Password />
         </Form.Item>
 
         <Form.Item
-        label="First name"
+        label="Имя"
         name={[ 'first_name']}
-        tooltip="What do you want others to call you?"
-        rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
+        tooltip="Как бы вы хотели чтобы вас называли другие?"
+        rules={[{ required: false, message: 'Пожалуйста введите имя!', whitespace: true }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Second name"
+        label="Фамилия"
         name={[ 'second_name']}
-        tooltip="What do you want others to call you?"
-        rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
+        tooltip="Как бы вы хотели чтобы вас называли другие?"
+        rules={[{ required: false, message: 'Пожалуйста введите фамилию', whitespace: true }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Patronymic"
+        label="Отчество"
         name={[ 'patronymic']}
-        tooltip="What do you want others to call you?"
-        rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
+        tooltip="Как бы вы хотели чтобы вас называли другие?"
+        rules={[{ required: false, message: 'Пожалуйста введите отчество!', whitespace: true }]}
       >
         <Input />
       </Form.Item>
 
 
-      <Form.Item label="Captcha" extra="We must make sure that your are a human.">
+      <Form.Item label="Captcha" extra="Мы должны убедиться, что вы человек">
         <Row gutter={8}>
           <Col span={12}>
             <Form.Item
               name="captcha"
               noStyle
-              rules={[{ required: false, message: 'Please input the captcha you got!' }]}
+              rules={[{ required: false, message: 'Пожалуйста введите captcha!' }]}
             >
               <Input />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Button>Get captcha</Button>
+            <Button>Получить captcha</Button>
           </Col>
         </Row>
       </Form.Item>
@@ -166,18 +169,18 @@ function Registration(){
         rules={[
           {
             validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+              value ? Promise.resolve() : Promise.reject(new Error('Вы должны ознакомиться с соглашением')),
           },
         ]}
         {...tailFormItemLayout}
       >
         <Checkbox>
-          I have read the <a href="">agreement</a>
+          Я прочитал <a href="">соглашение</a>
         </Checkbox>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
+        <Button type="primary" style={{textAlign:'center'}} htmlType="submit">
+        Зарегистрироваться
         </Button>
       </Form.Item>
       </Form>

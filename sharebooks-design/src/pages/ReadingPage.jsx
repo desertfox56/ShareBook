@@ -51,14 +51,14 @@ const BookReadingPage = () => {
   // Функция для рендеринга содержимого главы
   const renderChapterContent = (chapter) => (
     <Typography>
-      <Paragraph>
+      <Paragraph style={{ fontFamily: "'Baskervville', serif", fontWeight: 'normal', color:'#121111' }}>
         {chapter.content}
       </Paragraph>
     </Typography>
   );
 
   return (
-    <div style={genreStyle}>
+    <div className="book-reading-page" style={genreStyle}>
         <div style={{textAlign:'center'}}>
         <Image
             alt="example"
@@ -70,7 +70,7 @@ const BookReadingPage = () => {
       <Title level={2}>Название Книги</Title></div>
 
       <ProgressBar/> {/* Прогресс чтения */}
-
+      
       <Collapse collapsible="header"
       defaultActiveKey={['0']}>
         {chapters.map((chapter, index) => (
@@ -80,7 +80,7 @@ const BookReadingPage = () => {
         ))}
          
       </Collapse>
-     
+      
       <div style={{ marginTop: 20, textAlign: 'center' }}>
         <AppPagination/>
       </div>

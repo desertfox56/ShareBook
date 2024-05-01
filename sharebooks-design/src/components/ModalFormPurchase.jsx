@@ -1,13 +1,13 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import {  Modal } from 'antd';
 import axios from 'axios';
 import '../assets/css/ModalForm.css'
-
-const ModalForm = ({ selectedBook, isOpen, setIsOpen }) =>{
-    const [ setUserData] = useState(null);
-    
-  useEffect(() => {
-    const fetchUserData = async () => {
+import { useNavigate } from 'react-router-dom';
+export const ModalFormPurchase = ({ selectedBook, isOpen, setIsOpen }) =>{
+    const [confirmLoading, setConfirmLoading] = useState(false);
+    const navigate = useNavigate();
+    const handleOk = async () => {
+      setConfirmLoading(true);
       if (!selectedBook) {
         console.log('No book selected');
         return;
@@ -21,36 +21,19 @@ const ModalForm = ({ selectedBook, isOpen, setIsOpen }) =>{
         const headers = { Authorization: `JWT ${token}` };
         const selectedBookId = selectedBook ? selectedBook.id : null;
         const PurchaseUrl = `http://localhost:8000/api/myBooks/purchase/${selectedBookId}/`;
-        const response = await axios.post(PurchaseUrl, {}, { headers });
-        setUserData(response.data);
+        await axios.post(PurchaseUrl, {}, { headers });
+        
+        console.log('Purchase successful');
+        
     } catch (error) {
         console.error('Error fetching user data:', error);
     }
+    setIsOpen(false);
+    setConfirmLoading(false);
+    alert('Purchase successful!');
+    navigate('/PaymentPage');
 };
-
-fetchUserData();
-}, [selectedBook]); // Depend on selectedBookId
-
-
-
-
-    const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    
-
-    const showModal = () => {
-        setOpen(true);
-      };
-
-      const handleOk = () => {
-        
-        setConfirmLoading(true);
-        setTimeout(() => {
-          setOpen(false);
-          setConfirmLoading(false);
-        }, 2000);
-      };
-    
+  
       const handleCancel = () => {
         console.log('Clicked cancel button');
         setIsOpen(false);
@@ -58,7 +41,6 @@ fetchUserData();
 
       return (
         <>
-          
           <Modal
             title="Покупка" 
             open={isOpen}
@@ -73,11 +55,9 @@ fetchUserData();
     <div><strong>Количество страниц:</strong> {selectedBook?.count_pages || 'Unknown'}</div>
     <div><strong>Возрастная группа:</strong> {selectedBook?.age_restriction || 'Unknown'}</div>
     <div><span className='Price'>Цена: {selectedBook?.price || 'Unknown'}₽</span></div>
-  </div>
-            
-            
+  </div>      
           </Modal>
         </>
       );
 };
-export default ModalForm;
+export default ModalFormPurchase;

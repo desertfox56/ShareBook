@@ -3,7 +3,11 @@ from .models import *
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import exceptions
-import re
+from rest_framework.exceptions import *
+from django.contrib.auth.password_validation import validate_password
+from django_otp.oath import TOTP
+import pyotp
+from rest_framework_simplejwt.tokens import RefreshToken
 import logging
 logger = logging.getLogger(__name__)
 class UserRegistrSerializer(serializers.ModelSerializer):
@@ -71,8 +75,83 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
          # IMPORTANT: Make sure to return the result of the parent class's validate method
         return super().validate(credentials)
+class LogOutSerilizer(serializers.Serializer):
+    refresh_token = serializers.CharField()
+
+    def validate(self, data):
+        if not RefreshToken:
+            raise ValidationError("Refresh Token нужен для выхода из аккаунта")
+        return data
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'first_name', 'second_name', 'patronymic']
+
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    otp = serializers.CharField(required=True)
+    new_password = serializers.CharField(write_only=True, required=True)
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value
+
+    def validate(self, data):
+        try:
+            user = User.objects.get(email=data['email'])
+        except User.DoesNotExist:
+            raise ValidationError("User with this email does not exist.")
+
+        
+        # Initialize the TOTP object here with the user's secret
+        totp = pyotp.TOTP(user.totp_secret, interval=86400)
+    # You do not need to decode the secret as pyotp handles it internally
+
+        if user.totp_secret and not totp.verify(data['otp']):
+            raise ValidationError("OTP is invalid or has expired.")
+
+        if not user.is_active:
+            raise ValidationError("User account is not active.")
+
+        return data
+
+    def save(self):
+        email = self.validated_data['email']
+        new_password = self.validated_data['new_password']
+        user = User.objects.get(email=email)
+        user.set_password(new_password)
+        user.save()
+        # Optionally clear the OTP secret key if it should not be used again
+        user.totp_secret = None
+        user.save()
+        return user
+    
+class ChangePasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(required=True)
+    new_password = serializers.CharField(write_only=True, required=True)
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value
+    
+    def validate_email(self, value):
+        try:
+            self.user = User.objects.get(email=value)
+        except User.DoesNotExist:
+            raise ValidationError("User with this email does not exist.")
+        
+    def validate(self, data):
+        user = self.user
+        if not user.check_password(data['password']):
+            raise serializers.ValidationError("Password does not match the current password.")
+        if data['password'] == data['new_password']:
+            raise serializers.ValidationError("New password must be different from the current password.")
+        return data
+        
+    def save(self):  
+        user = self.user
+        user.set_password(self.validated_data['new_password'])
+        user.save()
+        return user

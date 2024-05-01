@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import '../assets/css/login.css';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
     required: '${label} is required!',
@@ -16,9 +17,9 @@ const validateMessages = {
     },
   };
   /* eslint-enable no-template-curly-in-string */
-
-function LogIn(){
-
+  
+const LogIn=()=>{
+  const navigate = useNavigate();
   const onFinish = async (values) => {
 
     console.log('Form values:', values); // Добавляем эту строку
@@ -29,6 +30,7 @@ function LogIn(){
 
       // Получаем токен доступа из ответа
       const accessToken = response.data.access;
+      const refreshToken = response.data.refresh;
 
       // Декодируем токен доступа, чтобы извлечь id пользователя
       const decoded = jwtDecode(accessToken);
@@ -37,8 +39,10 @@ function LogIn(){
       // Сохраняем токен доступа и id пользователя в localStorage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('userId', decoded.id);
+      localStorage.setItem('RefreshToken', refreshToken);
 
       alert('Login successful!');
+      navigate('/SuccessPage');
     } catch (error) {
       // Обработка ошибок
       // Обработка ошибок
@@ -58,7 +62,6 @@ function LogIn(){
     }
   };
 
-
     return(
       <div className='form' >
         <Form
@@ -71,17 +74,17 @@ function LogIn(){
         onFinish={onFinish} // Добавляем функцию onFinish
       >
         <Form.Item 
-          label="Login"
+          label="E-mail"
           name={[ 'email']}
-          rules={[{ required: true, message: 'Please input your email',type: 'email' }]}
+          rules={[{ required: true, message: 'Пожалуйста введите свою почту',type: 'email' }]}
         >
           <Input />
         </Form.Item>
     
         <Form.Item
-          label="Password"
+          label="Пароль"
           name={[ 'password']}
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
         >
           <Input.Password />
         </Form.Item>
@@ -91,25 +94,20 @@ function LogIn(){
           valuePropName="checked"
           wrapperCol={{ offset: 8, span: 16 }}
         >
-          <Checkbox>Remember me</Checkbox>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Checkbox>Запомнить меня</Checkbox> 
+          
+          <Link className="login-form-forgot" to="/reset_password/">Забыл пароль?</Link></div>
         </Form.Item>
     
-        <Form.Item>
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-        </Form.Item>
-
-
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Log in
-          </Button>
-          Or <a href="/Registration/">register now!</a>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button type="primary" style={{marginRight: '2%'}} htmlType="submit" onClick={onFinish}> Войти</Button>
+          Или <Link to="/Registration/" style={{marginLeft:'2%'}} >Зарегистрироваться</Link></div>
         </Form.Item>
       </Form>
       </div>
     );
 }
-
+//Авторизация сейчас происходит через нажатие enter, а черезнажатие кнопки Войти просто происходит переадресация на страницу успеха. Исправить это
 export default LogIn;

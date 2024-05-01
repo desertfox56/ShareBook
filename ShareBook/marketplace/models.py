@@ -33,7 +33,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='books')
-    file = models.FileField()
+    file = models.URLField(max_length=500)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     count_pages = models.IntegerField()
     age_restriction = models.CharField(max_length=4,choices=AGE_RESTRICTIONS)

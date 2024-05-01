@@ -9,6 +9,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Keeps Python from buffering stdout and stderr. It helps in logging.
 ENV PYTHONUNBUFFERED=1
 
+# Set the timezone
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 WORKDIR /app
 
 # Create a non-privileged user to run the application securely.

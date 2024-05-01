@@ -1,7 +1,7 @@
 //Доделать
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, Col, Row,Typography, Image, Avatar,Button } from 'antd';
-import { DollarOutlined,GiftOutlined,ReadOutlined } from '@ant-design/icons';
+import { LockOutlined , UnlockOutlined , HeartOutlined ,DollarOutlined,GiftOutlined,ReadOutlined } from '@ant-design/icons';
 import '../assets/css/Cards.css';
 import PictureDonQuxote from '../assets/img/Don Quixote.jpg';
 import ServantesAvatar from '../assets/img/migel-de-servantes.jpg';
@@ -9,44 +9,16 @@ import PictureRobinsonCrusoe from '../assets/img/RobinsonCrusoe.jpg';
 import DefoeAvatar from '../assets/img/DanielDefoe.jpg';
 import PictureAncientGreekMythos from '../assets/img/AncientGreekMythos.jpg';
 import SchwabAvatar from '../assets/img/GustavSchwab.jpg';
-import ModalFormPurchase from './ModalFormPurchase';
-import ModalFormTransfer from './ModalFormTransfer';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+
 const { Title, Text } = Typography;
 const { Meta } = Card;
 
-const Cards =()=>{
-  const [books, setBooks] = useState([]);
-  const [selectedBook, setSelectedBook] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const navigate = useNavigate(); // Hook for navigation
-
-
-  useEffect(() => {
-    const fetchBooks = async () => {
-        try {
-  
-            const response = await axios.get('http://localhost:8000/api/marketplace/allbooks/');
-            setBooks(response.data);
-            
-        } catch (error) {
-            console.error('Error fetching books:', error);
-        }
-    };
-
-    fetchBooks();
-}, []);
-
-  
-
-
+function WishCards(){
   const cardStyle = {
     width: '100%', // ширина карточки в процентах относительно родителя
     height: '650px',
     maxHeight: '780px', // максимальная высота карточки
     margin: '0 auto', // центрирование карточки
-    
   };
 
   const coverImageStyle = {
@@ -54,26 +26,14 @@ const Cards =()=>{
     height: '300px', // фиксированная высота обложки
     objectFit: 'cover', // обрезка изображения по размеру контейнера
   };
-
-  const handlePurchaseClick = (book) => {
-    setSelectedBook(book);
-    setIsModalVisible(true); // Opens the modal when a book is selected
-  };
-  const handleReadingClick=()=>{
-    navigate('/Reading');
-  }
-
     return(
-      
-      <Row gutter={16} className='Row'>
-         {books.map((book) => (
-      <Col span={8} key={book.id}>
-      
-        <Card  bordered={false} style={cardStyle} className="custom-card"
+      <Row gutter={16} className='Row2'>
+      <Col span={8} >
+        <Card  bordered={false} style={cardStyle} className="custom-card2"
         cover={
           <Image
             alt="example"
-            src={book.image}
+            src={PictureDonQuxote}
             height="40%"
             width="100%"
             style={coverImageStyle}
@@ -81,38 +41,35 @@ const Cards =()=>{
           />
         }
         actions={[
-          <DollarOutlined key="buy" onClick={() => handlePurchaseClick(book)} />,
-          <ReadOutlined key="reading" onClick={handleReadingClick} />,
-          <GiftOutlined key="gift" onClick={() => handlePurchaseClick(book)} />,
+          <DollarOutlined key="buy" />,
+          <ReadOutlined key="reading" />,
+          <GiftOutlined key="gift" />,
+          <LockOutlined />
         ]}>
           <Meta
       avatar={<Avatar src={ServantesAvatar} />}
       title={null}
       description={
-        <div>
+        <div><HeartOutlined style={{ fontSize: '170%'}}/>
           <div style={{ marginBottom: '16px' }}>
-            <Button  style={{ marginTop: '8px' }}>{book.author_name}</Button> {/* Кнопка автора */}
-            <Button >{book.genre_name}</Button> {/* Кнопка жанра */}
+            <Button  style={{ marginTop: '8px' }}>Мигель де Сервантес</Button> {/* Кнопка автора */}
+            <Button >Роман</Button> {/* Кнопка жанра */}
           </div>
           <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold',color:'#1F1F1F' }}>
-          {book.title}
+        Дон Кихот
       </div>
       <div style={{color:'#1F1F1F'}}>
-      {book.description}
+          История об Алонсо Кихано, жителе некоего села в захолустной испанской провинции Ла-Манча, который воображает себя странствующим рыцарем, бессмертна, а имя Дон Кихот стало своего рода мерилом оценки человеческих поступков.
         </div>
         </div>
       }
     />
         </Card>
       </Col>
-      
-))}
 
-<ModalFormPurchase selectedBook={selectedBook} isOpen={isModalVisible} setIsOpen={setIsModalVisible} />
-<ModalFormTransfer selectedBook={selectedBook} isOpen={isModalVisible} setIsOpen={setIsModalVisible} />
 
       <Col span={8} >
-      <Card  bordered={false} style={cardStyle} className="custom-card"
+      <Card  bordered={false} style={cardStyle} className="custom-card2"
         cover={
           <Image
             alt="example"
@@ -127,12 +84,13 @@ const Cards =()=>{
           <DollarOutlined key="buy" />,
           <ReadOutlined key="reading" />,
           <GiftOutlined key="gift" />,
+          <UnlockOutlined />
         ]}>
           <Meta
       avatar={<Avatar src={DefoeAvatar} />}
       title={null}
       description={
-        <div>
+        <div><HeartOutlined style={{ fontSize: '170%'}}/>
           <div style={{ marginBottom: '16px' }}>
             <Button  style={{ marginTop: '8px' }}>Даниэль Дефо</Button> {/* Кнопка автора */}
             <Button >Роман</Button> {/* Кнопка жанра */}
@@ -150,15 +108,16 @@ const Cards =()=>{
       </Col>
 
 
-      <Col span={8}>
-        <Card  bordered={false} style={cardStyle} className="custom-card"
+      <Col span={8} >
+        <Card  bordered={false} style={cardStyle} className="custom-card2" 
         cover={
           <Image
             alt="example"
-            src={PictureAncientGreekMythos}
+            src={PictureDonQuxote}
             height="40%"
             width="100%"
             style={coverImageStyle}
+           
             
           />
         }
@@ -166,32 +125,30 @@ const Cards =()=>{
           <DollarOutlined key="buy" />,
           <ReadOutlined key="reading" />,
           <GiftOutlined key="gift" />,
+          <LockOutlined />
         ]}>
           <Meta
-      avatar={<Avatar src={SchwabAvatar} />}
+      avatar={<Avatar src={ServantesAvatar} />}
       title={null}
       description={
-        <div>
+        <div><HeartOutlined style={{ fontSize: '170%'}}/>
           <div style={{ marginBottom: '16px' }}>
-            <Button  style={{ marginTop: '8px' }}>Густав Шваб</Button> {/* Кнопка автора */}
-            <Button >Эпос</Button> {/* Кнопка жанра */}
+            <Button  style={{ marginTop: '8px' }}>Мигель де Сервантес</Button> {/* Кнопка автора */}
+            <Button >Роман</Button> {/* Кнопка жанра */}
           </div>
-          <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '20px', fontWeight: 'bold',color:'#1F1F1F' }}>
-          Мифы и притчи классической древности
+          <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold',color:'#1F1F1F' }}>
+        Дон Кихот
       </div>
       <div style={{color:'#1F1F1F'}}>
-      В настоящее издание включены наиболее популярные античные мифы, изложенные поэтом-романтиком, а также ряд произведений французского и немецкого эпосов в литературной обработке писателя.
+          История об Алонсо Кихано, жителе некоего села в захолустной испанской провинции Ла-Манча, который воображает себя странствующим рыцарем, бессмертна, а имя Дон Кихот стало своего рода мерилом оценки человеческих поступков.
         </div>
         </div>
       }
     />
         </Card>
-      </Col>  
-
-      
+      </Col>
 
     </Row>
-
     );
 }
-export default Cards;
+export default WishCards;
