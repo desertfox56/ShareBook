@@ -4,6 +4,7 @@ from .models import *
 
 class BookSerializer(serializers.ModelSerializer):
     genre_name = serializers.CharField(source='genre.name', read_only=True)
+    language_name = serializers.CharField(source='language.name', read_only=True)
     author_name = serializers.SerializerMethodField()
 
     def get_author_name(self, obj):

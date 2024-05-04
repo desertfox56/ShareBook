@@ -18,6 +18,8 @@ import OurProjectPage from './pages/OurProjects.jsx';
 import ResetPasswordForm from './pages/ResetPasswordPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import WishPage from './pages/WishPage.jsx';
+import { PDFViewer } from '@react-pdf/renderer';
+import RenderPDF from './pages/PDF.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -45,6 +47,8 @@ function App() {
         <Route path='Reset_password/' element={<ResetPasswordForm/>}></Route>
         <Route path='PaymentPage/' element={<PaymentPage/>}></Route>
         <Route path='WishPage/' element={<WishPage/>}></Route>
+        
+        <Route path='PDFView/' element={<RenderPDF/>}></Route>
       </Routes>
       </div>
       <AppFooter />

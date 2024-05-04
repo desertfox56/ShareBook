@@ -28,7 +28,7 @@ const Cards =()=>{
         try {
   
             const response = await axios.get('http://localhost:8000/api/marketplace/allbooks/');
-            setBooks(response.data);
+            setBooks(response.data.results);
             
         } catch (error) {
             console.error('Error fetching books:', error);
@@ -135,14 +135,14 @@ const Cards =()=>{
         <div>
           <div style={{ marginBottom: '16px' }}>
             <Button  style={{ marginTop: '8px' }}>Даниэль Дефо</Button> {/* Кнопка автора */}
-            <Button >Роман</Button> {/* Кнопка жанра */}
+            <Button >Роман</Button> {/* Кнопка жанра  */}
           </div>
           <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold',color:'#1F1F1F' }}>
         Робинзон Крузо
       </div>
       <div style={{color:'#1F1F1F'}}>
       Робинзон Крузо, молодой и легкомысленный, после кораблекрушения оказывается на необитаемом острове в полном одиночестве. Он осваивает новый мир, благодаря упорству и трудолюбию учится обеспечивать себя необходимым и неутомимо ищет пути к спасению.
-        </div>
+        </div> 
         </div>
       }
     />
@@ -188,7 +188,7 @@ const Cards =()=>{
         </Card>
       </Col>  
 
-      
+    
 
     </Row>
 
