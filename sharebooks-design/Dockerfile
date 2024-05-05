@@ -11,7 +11,10 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 # Копирование оставшихся файлов проекта
-COPY . ./
+COPY . .
+
+EXPOSE  3000
+
 CMD ["npm", "start"]
 # Сборка приложения
 #RUN npm run build

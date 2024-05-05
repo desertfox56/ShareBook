@@ -11,7 +11,7 @@ function AppFooter(){
         <div className='Logo' style={{ display: 'flex',flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             
             <Image src={logo} width={50} />
-            <Title level={3} style={{ marginLeft: '15px' }}>&copy; 2023 ShareBook. All rights reserved.</Title>
+            <Title level={3} style={{ marginLeft: '15px' }}>&copy; 2024 ShareBook. All rights reserved.</Title>
         </div>
 
         <div style={{ display: 'flex',flex: 2, justifyContent: 'right', gap: '15px' }}>
