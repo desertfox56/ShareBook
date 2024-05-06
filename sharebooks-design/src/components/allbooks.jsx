@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { MenuUnfoldOutlined  } from '@ant-design/icons';
-import { Menu, Switch, Avatar } from 'antd';
-import { jwtDecode } from 'jwt-decode';
+import { Menu, Avatar } from 'antd';
 import axios from 'axios';
 
 function getItem(label, key, icon, children, type) {
@@ -30,8 +29,7 @@ function getItem(label, key, icon, children, type) {
           return;
         }
 
-        // Декодируем токен и извлекаем ID пользователя
-        const decodedToken = jwtDecode(token);
+        
         
 
         // Добавляем токен в заголовки запроса

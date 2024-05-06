@@ -5,66 +5,41 @@ import { Typography, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import '../assets/css/Filter.css';
 import axios from 'axios';
-// Константа для стратегии отображения выбранных элементов
+import { useFilters } from '../context/FiltersContext';
 const { SHOW_CHILD } = Cascader;
 const {Title} = Typography;
 
 function Filter() {
-  const [genres, setGenres] = useState([]);
-  const [languages, setLanguages] = useState([]);
-  const [authors, setAuthors] = useState([]);
-  const [ageRange, setAgeRange] = useState([0, 60]);
-  const [priceRange, setPriceRange] = useState([0, 1000]);
-  const [selectedAuthor, setSelectedAuthor] = useState(null);
-  const [filters, setFilters] = useState({
-    genre: null,
-    language: null,
-    author: null,
-});
+  const { filters, updateFilters, fetchFilteredBooks, fetchMetadata } = useFilters();
 
-  useEffect(() => {
-    async function fetchData() {
-      
-        const response = await axios.get('http://localhost:8000/api/marketplace/allbooks/');
-        if (response.data && response.data.results) {
-          setGenres([...new Set(response.data.results.map(book => ({ label: book.genre_name, value: book.genre })))]);
-          setLanguages([...new Set(response.data.results.map(book => ({ label: book.language_name, value: book.language })))]);
-          setAuthors([...new Set(response.data.results.map(book => ({ label: book.author_name, value: book.author })))]);
-          //setAge([...new Set(response.data.results.map(book => ({label: book.age_restriction, value: book.age})))]);
-          
-      } else {
-          console.error('Unexpected response structure:', response.data);
-      }
-  }
-    fetchData();
-  }, []);
+  const handleFilterChange = (value, filterName) => {
+    updateFilters({ ...filters, [filterName]: value });
+  };  
 
-  const filteredAuthors = useMemo(() => {
-    return authors.filter(author => author.value === selectedAuthor);
-  }, [authors, selectedAuthor]);
+  const applyFilters = () => {
+    const queryParams = new URLSearchParams({
+      genre: filters.genres.join(','),
+      language: filters.languages.join(','),
+      author: filters.authors.join(','),
+      age_restriction_gte: filters.ageRange[0],
+      age_restriction_lte: filters.ageRange[1],
+      price_gte: filters.priceRange[0],
+      price_lte: filters.priceRange[1]
+    }).toString();
 
-  // Функция для обработки выбора
-  const handleFilterChange = (value, field) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
-};
-const applyFilters = () => {
-    console.log('Applying filters:', filters);
-    console.log('Age Range:', ageRange);
-    console.log('Price Range:', priceRange);
-    // Here you might fetch filtered data from the backend or filter locally
-};
-const onChangeAuthor = (value, selectedOptions) => {
-    setSelectedAuthor(value);
+    fetchFilteredBooks(queryParams);
   };
-
+  useEffect(() => {
+    fetchMetadata();
+  }, []);
   return (
     <div className='Filter'>
       <Title level={2}>Категории</Title>
     <Title level={3}>Жанр</Title>
       <Cascader
         style={{ width: '30%' }}
-        options={genres}
-        onChange={(value) => handleFilterChange(value, 'genre')}
+        options={filters.genres.map(g => ({ label: g.label, value: g.value }))}
+        onChange={(value) => handleFilterChange(value, 'genres')}
         multiple
         maxTagCount="responsive"
         showCheckedStrategy={SHOW_CHILD}
@@ -74,29 +49,29 @@ const onChangeAuthor = (value, selectedOptions) => {
       <Title level={3}>Язык</Title>
       <Cascader
         style={{ width: '30%' }}
-        options={languages}
-        onChange={(value) => handleFilterChange(value, 'language')}
+        options={filters.languages.map(l => ({ label: l.label, value: l.value }))}
+        onChange={(value) => handleFilterChange(value, 'languages')}
         multiple
         maxTagCount="responsive"
-        defaultValue={['russian']}
+        //defaultValue={['russian']}
       />
       <Title level={3}>Автор</Title>
       <Cascader
         style={{ width: '30%' }}
-        options={authors}
-        onChange={(value) => handleFilterChange(value, 'author')}
+        options={filters.authors.map(a => ({ label: a.label, value: a.value }))}
+        onChange={(value) => handleFilterChange(value, 'authors')}
         multiple
         maxTagCount="responsive"
       />
 
       <Title level={4}>Возраст</Title>
-      <Slider range={{ draggableTrack: true }} defaultValue={ageRange}
-                onChange={setAgeRange}
+      <Slider range={{ draggableTrack: true }} defaultValue={filters.ageRange}
+                onChange={(value) => handleFilterChange(value, 'ageRange')}
                 min={0}
                 max={100} style={{ width: '30%' }} />
       <Title level={4}>Цена</Title>
-      <Slider range={{ draggableTrack: true }} defaultValue={[0, 50]} style={{ width: '30%' }} 
-                onChange={setPriceRange}
+      <Slider range={{ draggableTrack: true }} defaultValue={filters.priceRange} style={{ width: '30%' }} 
+                onChange={(value) => handleFilterChange(value, 'priceRange')}
                 min={0}
                 max={1000}/>
       <Button icon={<SearchOutlined />} onClick={applyFilters}>Найти</Button>

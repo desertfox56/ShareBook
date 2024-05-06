@@ -18,7 +18,6 @@ import OurProjectPage from './pages/OurProjects.jsx';
 import ResetPasswordForm from './pages/ResetPasswordPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import WishPage from './pages/WishPage.jsx';
-import { PDFViewer } from '@react-pdf/renderer';
 import RenderPDF from './pages/PDF.jsx';
 function App() {
   return (

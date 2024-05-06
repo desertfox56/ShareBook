@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import { Image, Typography } from 'antd';
+import { Image } from 'antd';
 import PictureHarryPotter from '../assets/img/HarryPotter.jpg'
 import PictureDonQuxote from '../assets/img/Don Quixote.jpg'
 const contentStyle = {

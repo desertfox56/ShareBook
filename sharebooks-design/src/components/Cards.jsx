@@ -13,6 +13,7 @@ import ModalFormPurchase from './ModalFormPurchase';
 import ModalFormTransfer from './ModalFormTransfer';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useFilters } from '../context/FiltersContext';
 const { Title, Text } = Typography;
 const { Meta } = Card;
 
@@ -21,7 +22,7 @@ const Cards =()=>{
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate(); // Hook for navigation
-
+  const { filteredBooks } = useFilters();
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -66,8 +67,8 @@ const Cards =()=>{
     return(
       
       <Row gutter={16} className='Row'>
-         {books.map((book) => (
-      <Col span={8} key={book.id}>
+         {filteredBooks.map((book) => (
+      <Col span={8} key={book.id} style={{marginBottom:'5%'}}>
       
         <Card  bordered={false} style={cardStyle} className="custom-card"
         cover={

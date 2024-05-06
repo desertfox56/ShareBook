@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  AutoComplete,
   Button,
-  Cascader,
   Checkbox,
   Col,
   Form,
   Input,
-  InputNumber,
   Row,
   Select,
 } from 'antd';

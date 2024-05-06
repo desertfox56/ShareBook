@@ -1,6 +1,5 @@
 import React from 'react';
 import Filter from '../components/Filter';
-import Cards from '../components/Cards';
 import AppPagination from '../components/Pagination';
 import WishCards from '../components/WishCards';
 import '../assets/css/marketplace.css';

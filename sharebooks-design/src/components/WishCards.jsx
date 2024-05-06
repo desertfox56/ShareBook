@@ -7,10 +7,10 @@ import PictureDonQuxote from '../assets/img/Don Quixote.jpg';
 import ServantesAvatar from '../assets/img/migel-de-servantes.jpg';
 import PictureRobinsonCrusoe from '../assets/img/RobinsonCrusoe.jpg';
 import DefoeAvatar from '../assets/img/DanielDefoe.jpg';
-import PictureAncientGreekMythos from '../assets/img/AncientGreekMythos.jpg';
-import SchwabAvatar from '../assets/img/GustavSchwab.jpg';
+//import PictureAncientGreekMythos from '../assets/img/AncientGreekMythos.jpg';
+//import SchwabAvatar from '../assets/img/GustavSchwab.jpg';
 
-const { Title, Text } = Typography;
+//const { Title, Text } = Typography;
 const { Meta } = Card;
 
 function WishCards(){

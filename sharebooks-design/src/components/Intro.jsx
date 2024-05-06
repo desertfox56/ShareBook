@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import { Typography,Image,Layout, Button } from 'antd';
+import React from 'react';
+import { Typography,Image, Button } from 'antd';
 import Photo1 from '../assets/img/reading_man.jpg';
 import Photo2 from '../assets/img/reading_girl.jpg';
 import { Link } from 'react-router-dom';

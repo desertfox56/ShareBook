@@ -2,7 +2,7 @@ import React from 'react';
 import {  Typography } from 'antd';
 import FAQAccordion from '../components/Accordion';
 import '../assets/css/FAQ.css';
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 function FAQPage(){
   return(
     <>
