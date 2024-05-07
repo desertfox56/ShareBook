@@ -11,12 +11,17 @@ const {Title} = Typography;
 
 function Filter() {
   const { filters, updateFilters, fetchFilteredBooks, fetchMetadata } = useFilters();
+  console.log("Context filters:", filters);
+
 
   const handleFilterChange = (value, filterName) => {
+    console.log("После нажатия:", filters);
     updateFilters({ ...filters, [filterName]: value });
+    console.log("UpdateFilters:", updateFilters);
   };  
 
   const applyFilters = () => {
+    console.log("applyFilters:", updateFilters);
     const queryParams = new URLSearchParams({
       genre: filters.genres.join(','),
       language: filters.languages.join(','),
@@ -28,6 +33,7 @@ function Filter() {
     }).toString();
 
     fetchFilteredBooks(queryParams);
+    console.log("fetchFilteredBooks:", fetchFilteredBooks);
   };
   useEffect(() => {
     fetchMetadata();
@@ -38,18 +44,20 @@ function Filter() {
     <Title level={3}>Жанр</Title>
       <Cascader
         style={{ width: '30%' }}
-        options={filters.genres.map(g => ({ label: g.label, value: g.value }))}
+        options={filters.genreData}
         onChange={(value) => handleFilterChange(value, 'genres')}
         multiple
         maxTagCount="responsive"
         showCheckedStrategy={SHOW_CHILD}
-      />
+        
+      /> 
+
       <br />
       <br />
       <Title level={3}>Язык</Title>
       <Cascader
         style={{ width: '30%' }}
-        options={filters.languages.map(l => ({ label: l.label, value: l.value }))}
+        options={filters.languageData}
         onChange={(value) => handleFilterChange(value, 'languages')}
         multiple
         maxTagCount="responsive"
@@ -58,7 +66,7 @@ function Filter() {
       <Title level={3}>Автор</Title>
       <Cascader
         style={{ width: '30%' }}
-        options={filters.authors.map(a => ({ label: a.label, value: a.value }))}
+        options={filters.authorData}
         onChange={(value) => handleFilterChange(value, 'authors')}
         multiple
         maxTagCount="responsive"
