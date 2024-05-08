@@ -4,6 +4,7 @@ from .models import Book
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import filters
+from .filters import BookFilters 
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
@@ -28,7 +29,7 @@ class BookFilterSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['title','author','genre','language','age_restriction','price']
+    filterset_class = BookFilters
 
 #ФильтрЖанры
 class GenreViewSet(viewsets.ReadOnlyModelViewSet):

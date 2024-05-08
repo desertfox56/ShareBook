@@ -53,7 +53,7 @@ export const ModalFormPurchase = ({ selectedBook, isOpen, setIsOpen }) =>{
     <div><strong>Автор:</strong> {selectedBook?.author_name || 'Unknown'}</div>
     <div><strong>Жанр:</strong> {selectedBook?.genre_name || 'Unknown'}</div>
     <div><strong>Количество страниц:</strong> {selectedBook?.count_pages || 'Unknown'}</div>
-    <div><strong>Возрастная группа:</strong> {selectedBook?.age_restriction || 'Unknown'}</div>
+    <div><span><strong>Возрастная группа:</strong> {selectedBook?.age_restriction || 'Unknown'}+</span></div>
     <div><span className='Price'>Цена: {selectedBook?.price || 'Unknown'}₽</span></div>
   </div>      
           </Modal>

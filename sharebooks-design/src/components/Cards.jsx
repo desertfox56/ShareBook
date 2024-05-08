@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Card, Col, Row,Typography, Image, Avatar,Button } from 'antd';
 import { DollarOutlined,GiftOutlined,ReadOutlined } from '@ant-design/icons';
 import '../assets/css/Cards.css';
-import PictureDonQuxote from '../assets/img/Don Quixote.jpg';
 import ServantesAvatar from '../assets/img/migel-de-servantes.jpg';
 import PictureRobinsonCrusoe from '../assets/img/RobinsonCrusoe.jpg';
 import DefoeAvatar from '../assets/img/DanielDefoe.jpg';
@@ -14,13 +13,14 @@ import ModalFormTransfer from './ModalFormTransfer';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useFilters } from '../context/FiltersContext';
-const { Title, Text } = Typography;
+//const { Title, Text } = Typography;
 const { Meta } = Card;
 
 const Cards =()=>{
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isPurchaseModalVisible, setPurchaseModalVisible] = useState(false);
+  const [isTransferModalVisible, setTransferModalVisible] = useState(false);
   const navigate = useNavigate(); // Hook for navigation
   const { filteredBooks } = useFilters();
 
@@ -58,7 +58,11 @@ const Cards =()=>{
 
   const handlePurchaseClick = (book) => {
     setSelectedBook(book);
-    setIsModalVisible(true); // Opens the modal when a book is selected
+    setPurchaseModalVisible(true); // Opens the modal when a book is selected
+  };
+  const handleTransferClick = (book) => {
+    setSelectedBook(book);
+    setTransferModalVisible(true); // Opens the modal when a book is selected
   };
   const handleReadingClick=()=>{
     navigate('/Reading');
@@ -67,7 +71,7 @@ const Cards =()=>{
     return(
       
       <Row gutter={16} className='Row'>
-         {filteredBooks.map((book) => (
+         {(filteredBooks.length > 0 ? filteredBooks : books).map((book) => (
       <Col span={8} key={book.id} style={{marginBottom:'5%'}}>
       
         <Card  bordered={false} style={cardStyle} className="custom-card"
@@ -84,7 +88,7 @@ const Cards =()=>{
         actions={[
           <DollarOutlined key="buy" onClick={() => handlePurchaseClick(book)} />,
           <ReadOutlined key="reading" onClick={handleReadingClick} />,
-          <GiftOutlined key="gift" onClick={() => handlePurchaseClick(book)} />,
+          <GiftOutlined key="gift" onClick={() => handleTransferClick(book)} />,
         ]}>
           <Meta
       avatar={<Avatar src={ServantesAvatar} />}
@@ -109,8 +113,8 @@ const Cards =()=>{
       
 ))}
 
-<ModalFormPurchase selectedBook={selectedBook} isOpen={isModalVisible} setIsOpen={setIsModalVisible} />
-<ModalFormTransfer selectedBook={selectedBook} isOpen={isModalVisible} setIsOpen={setIsModalVisible} />
+<ModalFormPurchase selectedBook={selectedBook} isOpen={isPurchaseModalVisible} setIsOpen={setPurchaseModalVisible} />
+<ModalFormTransfer selectedBook={selectedBook} isOpen={isTransferModalVisible} setIsOpen={setTransferModalVisible} />
 
       <Col span={8} >
       <Card  bordered={false} style={cardStyle} className="custom-card"

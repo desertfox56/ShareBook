@@ -1,10 +1,9 @@
-import {React,useState, useMemo, useEffect} from 'react';
+import {React, useEffect} from 'react';
 import { Cascader } from 'antd';
 import { Slider } from 'antd';
 import { Typography, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import '../assets/css/Filter.css';
-import axios from 'axios';
 import { useFilters } from '../context/FiltersContext';
 const { SHOW_CHILD } = Cascader;
 const {Title} = Typography;
@@ -26,8 +25,8 @@ function Filter() {
       genre: filters.genres.join(','),
       language: filters.languages.join(','),
       author: filters.authors.join(','),
-      age_restriction_gte: filters.ageRange[0],
-      age_restriction_lte: filters.ageRange[1],
+      age_restriction__gte: filters.ageRange[0],
+      age_restriction__lte: filters.ageRange[1],
       price_gte: filters.priceRange[0],
       price_lte: filters.priceRange[1]
     }).toString();

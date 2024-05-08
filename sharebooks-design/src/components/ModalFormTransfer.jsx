@@ -66,7 +66,7 @@ const  ModalFormTransfer = ({ selectedBook, isOpen, setIsOpen }) =>{
     <div><strong>Автор:</strong> {selectedBook?.author_name || 'Unknown'}</div>
     <div><strong>Жанр:</strong> {selectedBook?.genre_name || 'Unknown'}</div>
     <div><strong>Количество страниц:</strong> {selectedBook?.count_pages || 'Unknown'}</div>
-    <div><strong>Возрастная группа:</strong> {selectedBook?.age_restriction || 'Unknown'}</div>
+    <div><strong>Возрастная группа:</strong> {selectedBook?.age_restriction || 'Unknown'}+</div>
     <div><span className='Price'>Цена: {selectedBook?.price || 'Unknown'}₽</span></div>
     <br></br>
     <div><Input placeholder="Введите почту друга" prefix={<UserOutlined />} onChange={(e) => setEmail(e.target.value)}/>{friend_mail?.receiver_user_email}</div>

@@ -22,11 +22,11 @@ class Author(models.Model):
 
 class Book(models.Model):
     AGE_RESTRICTIONS = [
-        ('0+', '0+'),
-        ('6+','6+'),
-        ('12+', '12+'),
-        ('16+', '16+'),
-        ('18+', '18+'),
+        (0, '0+'),
+        (6, '6+'),
+        (12, '12+'),
+        (16, '16+'),
+        (18, '18+'),
     ]
 
     title = models.CharField(max_length=100)
@@ -36,12 +36,14 @@ class Book(models.Model):
     file = models.URLField(max_length=500)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     count_pages = models.IntegerField()
-    age_restriction = models.CharField(max_length=4,choices=AGE_RESTRICTIONS)
+    age_restriction = models.IntegerField(null=True, blank=True,choices=AGE_RESTRICTIONS)
     language = models.ForeignKey(Language,on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE,related_name='genre_books')
     author = models.ForeignKey(Author, on_delete=models.CASCADE,related_name='author_books')
 
-    
+    def get_age_restriction_display_with_plus(self):
+        value = dict(self.AGE_RESTRICTIONS).get(self.age_restriction)
+        return value if value else self.age_restriction
 
 class DelebleModel(Book):
     delete = models.BooleanField()
