@@ -15,7 +15,7 @@ class Genre(models.Model):
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     second_name = models.CharField(max_length=50)
-    patronymic = models.CharField(max_length=50)
+    patronymic = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.second_name} {self.patronymic}"
@@ -40,6 +40,7 @@ class Book(models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE,related_name='genre_books')
     author = models.ForeignKey(Author, on_delete=models.CASCADE,related_name='author_books')
+    avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
 
     def get_age_restriction_display_with_plus(self):
         value = dict(self.AGE_RESTRICTIONS).get(self.age_restriction)

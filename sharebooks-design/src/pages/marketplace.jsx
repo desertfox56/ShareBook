@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
 import Filter from '../components/Filter';
 import Cards from '../components/Cards';
 import AppPagination from '../components/Pagination';
@@ -16,6 +15,7 @@ function Marketplace(){
         </div>
         <div className='cards-container'>
         <Cards  />
+        <Cards2/>
           <AppPagination />
         </div>
       </div>

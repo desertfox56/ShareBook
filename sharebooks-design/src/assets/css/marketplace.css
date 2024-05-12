@@ -2,10 +2,11 @@
     display: flex;
     align-items: flex-start; /* Выровнять содержимое по верху */
     margin-right: 2%;
+    width: 99%;
   }
   
   .filter-container {
-    width: 300px; /* Фиксированная ширина фильтра */
+    width: 286px; /* Фиксированная ширина фильтра */
     position: sticky;
     top: 10px; /* Расстояние от верха страницы */
     flex-shrink: 0; /* Предотвратить сжатие */

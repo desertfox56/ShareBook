@@ -14,13 +14,13 @@ logger = logging.getLogger(__name__)
 #Представление для того, чтобы bookId загрузился в localStorage в React(делаем доступным вовне админки book_id)
 class BookView(generics.RetrieveAPIView):
     permission_classes = [AllowAny]
-    queryset = Book.objects.all()
+    queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
 
 #Представление, чтобы показать все книги одним запросом
 class BookViewAll(generics.ListCreateAPIView):
     permission_classes = [AllowAny]
-    queryset = Book.objects.all().distinct()
+    queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
 
 #Фильтр
@@ -34,28 +34,29 @@ class BookFilterSet(viewsets.ModelViewSet):
 #ФильтрЖанры
 class GenreViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
-    queryset = Genre.objects.all()
+    queryset = Genre.objects.all().order_by('id')
     serializer_class = GenreSerializer
 
 #ЯзыкиФильтр
 class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
-    queryset = Language.objects.all()
+    queryset = Language.objects.all().order_by('id')
     serializer_class = LanguagesSerializer
 
 #АвторФильтр
 class AuthorViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
-    queryset = Author.objects.all()
+    queryset = Author.objects.all().order_by('id')
     serializer_class = AuthorSerializer
 
-#Поиск
+#Поиск по названию книги.
 class BookSearchView(generics.ListAPIView):
     permission_classes = [AllowAny]
     queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['@title', '@author_name','id']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter ]
+    filterset_class = BookFilters
+    search_fields = ['@title']
     def get_queryset(self):
         queryset = super().get_queryset()
         logger.debug(f"Initial queryset: {queryset.count()} items")

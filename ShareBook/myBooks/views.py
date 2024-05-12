@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status,viewsets
 from rest_framework.permissions import IsAuthenticated
-from django.utils.decorators import method_decorator
+from .notifications import send_notification
 from .models import *
 from marketplace.models import Book
 from .serializers import *
 from users.models import *
 from rest_framework import generics
+#ПокупкаКниги
 class PurchaseView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, book_id):
@@ -53,9 +54,12 @@ class TransferBookView(APIView):
 
         # Создаем запись о книге у receiver_user
         UserBook.objects.create(user=receiver_user, book=book)
-       
+
+        # Отправляем уведомление получателю
+        send_notification(receiver_user, f'Book {book.title} transferred to you by {giver_user.email}', 'transfer')   
 
         return Response({'message': 'Book transfer successful', 'giver_email': giver_user.email, 'receiver_email': receiver_user.email}, status=status.HTTP_201_CREATED)
+
 #Представление, чтобы показать пользователю какие книги у него есть 
 class PersonalLibraryView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -80,3 +84,53 @@ class PersonalLibraryView(generics.ListAPIView):
             'user_books': user_books_serializer.data,
             'book_transfers': book_transfers_serializer.data
         })
+    
+#Добавление в список желаемого
+class WishListView(APIView):
+    permission_classes=[IsAuthenticated]
+    def post(self, request, book_id):
+        book = get_object_or_404(Book, id=book_id)
+        user = request.user if request.user.is_authenticated else None  # Получаем текущего пользователя
+        if not user:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        # Попытка добавить книгу в список желаемого
+        try:
+            # Создаем запись о добавлении в список желаемого
+            WishBook.objects.create(user=user, book=book)
+            return Response({'message': 'Added to wishlist successfully'}, status=status.HTTP_201_CREATED)
+        except IntegrityError:
+            # Если такая запись уже существует, возвращаем ошибку
+            return Response({'error': 'This book is already in your wishlist'}, status=status.HTTP_409_CONFLICT)
+
+#Представление, чтобы показать пользователю какие книги у него в списке желаний
+class WishListLibraryView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+   
+    def get_queryset(self):
+        # Возвращает все книги списка желаний текущего пользователя
+        user = self.request.user
+        wish_books = WishBook.objects.filter(user=user).select_related('book')
+        return (wish_books)
+    
+    def list(self, request, *args, **kwargs):
+        # Получение книг 
+        wish_books = self.get_queryset()
+        # Сериализация данных
+        wish_books_serializer = WishBookSerializer(wish_books, many=True)
+        # Объединение данных в один ответ
+        return Response({'wish_books':  wish_books_serializer.data })
+
+#Сохранение уведомлений
+class NotificationViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = NotificationSerializer
+
+    def get_queryset(self):
+        return Notification.objects.filter(recipient=self.request.user, read=False)
+
+    def partial_update(self, request, pk=None):
+        notification = self.get_object()
+        notification.read = True
+        notification.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
