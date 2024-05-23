@@ -1,6 +1,8 @@
 import React from 'react';
-import { GithubOutlined, FacebookOutlined, RedditOutlined, TwitterOutlined, InstagramOutlined, LinkedinOutlined } from '@ant-design/icons';
+import { GithubOutlined, DiscordOutlined , RedditOutlined, TikTokOutlined , InstagramOutlined } from '@ant-design/icons';
 import { Layout, Menu, Image,Typography,Divider } from 'antd';
+import { Icon32LogoVk } from '@vkontakte/icons';
+import { FaDiscord, FaTiktok } from "react-icons/fa";
 import logo from '../assets/img/Logotype1.png';
 const {Footer} = Layout;
 const { Title } = Typography;
@@ -16,11 +18,10 @@ function AppFooter(){
 
         <div style={{ display: 'flex',flex: 2, justifyContent: 'right', gap: '15px' }}>
             <GithubOutlined title="GitHub"  style={{ fontSize: '30px' }}/>
-            <FacebookOutlined title="Facebook" style={{ fontSize: '30px' }} />
+            <FaDiscord  title="Facebook" style={{ fontSize: '30px' }} />
             <RedditOutlined title="Reddit"  style={{ fontSize: '30px' }}/>
-            <TwitterOutlined title="Twitter" style={{ fontSize: '30px' }} />
-            <InstagramOutlined title="Instagram"  style={{ fontSize: '30px' }}/>
-            <LinkedinOutlined title="LinkedIn" style={{ fontSize: '30px' }} />
+            <FaTiktok  title="Twitter" style={{ fontSize: '30px' }} />
+            <Icon32LogoVk title="VK" style={{ fontSize: '30px' }}/>
         </div>
 
     </Footer>

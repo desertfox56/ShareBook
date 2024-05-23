@@ -10,7 +10,8 @@
     position: sticky;
     top: 10px; /* Расстояние от верха страницы */
     flex-shrink: 0; /* Предотвратить сжатие */
-    background-color: #8ec0c6; /* Ваш цвет фона */
+    background-color: #d2d2d2; /* Ваш цвет фона */
+    border-radius:  8px;
   }
   
   .cards-container {

@@ -33,8 +33,8 @@ RUN apt-get update && apt-get install -y gcc libffi-dev libssl-dev && \
 
 ENV PATH="/root/.local/bin:${PATH}"
 
-# Install gunicorn
-RUN python -m pip install gunicorn
+# Install gunicorn, celery, redis
+RUN python -m pip install gunicorn celery redis
 
 # Download and install dependencies from requirements.txt.
 RUN --mount=type=cache,target=/root/.cache/pip \

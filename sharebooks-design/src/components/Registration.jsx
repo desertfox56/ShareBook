@@ -62,7 +62,7 @@ function Registration(){
       localStorage.setItem('userId', decoded.id);
       
           // Выводим алерт об успешной регистрации
-          alert('Registration successful!');
+          alert('Вы успешно зарегистрировались!');
           navigate('/login');
         } else {
           // Обработка ошибок при регистрации

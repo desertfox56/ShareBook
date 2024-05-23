@@ -41,7 +41,7 @@ const LogIn=()=>{
       localStorage.setItem('userId', decoded.id);
       localStorage.setItem('RefreshToken', refreshToken);
 
-      alert('Login successful!');
+      alert('Вы вошли успешно!');
       navigate('/SuccessPage');
     } catch (error) {
       // Обработка ошибок

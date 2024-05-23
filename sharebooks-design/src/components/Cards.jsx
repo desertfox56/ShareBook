@@ -53,11 +53,11 @@ const addBookToWishList = async (selectedBook) => {
     await axios.post(wishListUrl, {}, { headers });
 
     console.log('WishList adding successful');
-    alert('WishList adding successful!');
+    alert('Книга успешно добавлена в ваш список желаний!');
     navigate('/WishPage');
   } catch (error) {
     console.error('Error adding to wishlist:', error);
-    alert('Error adding to wishlist');
+    alert('Произошла ошибка:(');
   }
 };
 
@@ -75,7 +75,15 @@ const addBookToWishList = async (selectedBook) => {
     height: '280px', // фиксированная высота обложки
     objectFit: 'cover', // обрезка изображения по размеру контейнера
   };
-
+  const handleBookSelect = (book) => {
+    if (book && book.id) {
+      localStorage.setItem('selectedBookId', book.id);
+      setSelectedBook(book);
+      console.log(`Book ID ${book.id} saved to localStorage`);
+    } else {
+      console.log('Attempted to select a book with undefined ID');
+    }
+  };
   const handlePurchaseClick = (book) => {
     setSelectedBook(book);
     setPurchaseModalVisible(true); // Opens the modal when a book is selected
@@ -84,7 +92,10 @@ const addBookToWishList = async (selectedBook) => {
     setSelectedBook(book);
     setTransferModalVisible(true); // Opens the modal when a book is selected
   };
-  const handleReadingClick=()=>{
+  const handleReadingClick=(book)=>{
+    if (selectedBook !== book) { // Проверяем, что выбранная книга действительно изменилась
+      handleBookSelect(book);
+    }
     navigate('/Reading');
   }
 
@@ -107,7 +118,7 @@ const addBookToWishList = async (selectedBook) => {
         }
         actions={[
           <DollarOutlined key="buy" onClick={() => handlePurchaseClick(book)} />,
-          <ReadOutlined key="reading" onClick={handleReadingClick} />,
+          <ReadOutlined key="reading" onClick={handleReadingClick(book)} />,
           <GiftOutlined key="gift" onClick={() => handleTransferClick(book)} />,
           <HeartOutlined key="wishlist" onClick={() => addBookToWishList(book)} style={{ color: 'red' }} />,
         ]}>

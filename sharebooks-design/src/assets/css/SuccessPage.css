@@ -4,7 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Полная высота видимой части экрана */
+    justify-content: flex-start; /* Измените на flex-start, чтобы содержимое выравнивалось по началу страницы */
+    padding-bottom: 50px; /* Добавьте некоторый padding внизу, если нужно */
   }
   
   /* Стили для верхней части страницы, включая поисковую строку и ссылки профиля/настройки */
@@ -57,3 +58,8 @@
   .Avatar {
     margin-right: 10px; 
   }  
+ 
+.SuccessPage .searchResults {
+  margin-top: 20px;
+  margin-bottom: 20px; 
+}

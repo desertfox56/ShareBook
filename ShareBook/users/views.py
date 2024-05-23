@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
@@ -9,7 +8,7 @@ from django_otp.oath import TOTP
 from django_otp.util import random_hex
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import generics
 import logging
@@ -18,7 +17,7 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 logger = logging.getLogger(__name__)
-import base64
+#Регистрация
 # Создаём класс RegistrUserView
 class RegistrUserView(CreateAPIView):
     # Добавляем в queryset
@@ -48,6 +47,7 @@ class RegistrUserView(CreateAPIView):
             # Возвращаем ошибку
             return Response(data)
 
+#Авторизация
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
     def post(self, request, *args, **kwargs):
@@ -59,6 +59,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             logger.error(f"Error during login attempt: {e}")
             return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
+#Выход из учетной записи
 class LogoutView(APIView):
    permission_classes = [IsAuthenticated]
    serializer_class = LogOutSerilizer
@@ -81,17 +82,14 @@ class LogoutView(APIView):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
-
+#Профиль пользователя
 class UserProfileView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
-   
     serializer_class = UserProfileSerializer
-    
     
     def get_object(self):
         # Попытка получить пользователя по id, если пользователь не найден, будет возвращена ошибка 404
         return get_object_or_404(User, id=self.kwargs['pk'])
-
 
 #Восстановление пароля пользователем
 class ResetPassword(APIView):
@@ -151,7 +149,8 @@ class ResetPassword(APIView):
                 return Response({'detail': 'Invalid OTP or OTP has expired.'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        
+#Смена пароля для страницы настроек
 class ChangePassword(APIView):
      permission_classes = [IsAuthenticated]
      def post(self, request):
@@ -161,3 +160,31 @@ class ChangePassword(APIView):
             return Response({'detail': 'Password has been changed successfully.'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#Представление обратной связи для контактной формы
+class FeedBackView(APIView):
+    permission_classes = [AllowAny]
+    serializer_class = ContactSerailizer
+
+    def post(self, request, *args, **kwargs):
+        serializer_class = ContactSerailizer(data=request.data)
+        if serializer_class.is_valid():
+            data = serializer_class.validated_data
+            name = data.get('name')
+            from_email = data.get('email')
+            subject = data.get('subject')
+            message = data.get('message')
+            send_mail(f'От {name} | {subject}', message, from_email, ['aziev.farid@bk.ru'])
+            return Response({"success": "Sent"})
+        
+#Представление для удаления аккаунта пользователя
+class DeleteAccountView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        user = request.user
+        try:
+            user.delete()
+            logger.info(f"Successful deleting account for user: {request.data.get('email')}")
+            return Response({'message': 'Your account has been deleted.'}, status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

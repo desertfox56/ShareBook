@@ -11,5 +11,7 @@ urlpatterns = [
     path('api/logout/', LogoutView.as_view(), name='api_logout'),
     path('user_profile/<int:pk>/', UserProfileView.as_view(), name='user_profile'),
     path('reset_password/',ResetPassword.as_view(), name='reset_password'),
-    path('change_password/',ChangePassword.as_view(), name='change_password')
+    path('change_password/',ChangePassword.as_view(), name='change_password'),
+    path("feedback/", FeedBackView.as_view(), name='feedback'),
+    path('delete-account/', DeleteAccountView.as_view(), name='delete-account'),
 ] 

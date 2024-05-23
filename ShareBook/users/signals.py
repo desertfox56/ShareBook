@@ -1,8 +1,7 @@
 from .models import User, UserToken
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from rest_framework_simplejwt.tokens import RefreshToken
-
 
 @receiver(post_save, sender=User)
 def create_user_token(sender, instance=None, created=False, **kwargs):
@@ -17,3 +16,12 @@ def update_user_token(sender, instance=None, created=False, **kwargs):
         user_token, _ = UserToken.objects.get_or_create(user=instance.user)
         user_token.token = str(instance.access_token)
         user_token.save()
+
+@receiver(post_delete, sender=User)
+def delete_account(sender, instance=None, **kwargs):
+    # Логирование удаления пользователя или выполнение других действий
+    print(f"Аккаунт пользователя {instance.email} был удален.")
+    
+    # Например, удаление связанного токена пользователя, если он не удаляется автоматически
+    UserToken.objects.filter(user=instance).delete()
+  

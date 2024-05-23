@@ -4,8 +4,8 @@ import {getDocument, GlobalWorkerOptions} from 'pdfjs-dist/legacy/build/pdf.mjs'
 //import Tesseract from 'tesseract.js-core/tesseract-core';
 GlobalWorkerOptions.workerSrc = '/pdf.worker.mjs'; 
 
-const PDFTextExtractor = ({ pdfUrl }) => {
-    const [pdfText, setPdfText] = useState('');
+export function usePDFTextExtractor(pdfUrl, setPdfText) {
+
     
 function cleanText(text) {
     return text
@@ -19,8 +19,10 @@ function cleanText(text) {
     useEffect(() => {
         const fetchPdfText = async () => {
             const loadingTask = getDocument(pdfUrl);
+            console.log('Запуск загрузки PDF:', pdfUrl);
             try {
                 const pdf = await loadingTask.promise;
+                console.log('PDF загружен:', pdf);
                 let fullText = '';
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
@@ -29,20 +31,18 @@ function cleanText(text) {
                     fullText += cleanText(pageText) + ' '; // Append cleaned text from each page
                 }
                 setPdfText(fullText);
+                console.log('Текст PDF обработан:', fullText);
             } catch (error) {
-                console.error('Error loading PDF: ', error);
+                console.error('Ошибка загрузки PDF: ', error);
             }
         };
 
-        fetchPdfText();
-    }, [pdfUrl]);
+        if (pdfUrl) {
+            fetchPdfText();
+        } 
+    }, [pdfUrl, setPdfText]); console.log('Текст PDF setPdfText:', setPdfText);
 
-    return (
-        <div>
-            {pdfText ? <p>{pdfText}</p> : <p>Loading PDF content...</p>}
-            
-        </div>
-    );
+    
 };
 
-export default PDFTextExtractor;
+

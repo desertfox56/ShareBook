@@ -1,7 +1,7 @@
 .Filter{
     margin-top: 20px; /* Если нужен верхний отступ */
     padding: 20px; 
-    background-color: #8ec0c6;
+    background-color: #d2d2d2;
     border-radius: 1%;
     
     
@@ -13,10 +13,13 @@
 .Filter Button{
     margin-top: 3%;
     margin-bottom: 3%;
-    background-color: #F2B705;
+    background-color: #69B1FF;
+    color: #ffffff;
     width: 100%;
 }
-
+.Filter Button:hover{
+    color: #128A8C;
+}
 
 .Row{
     margin-bottom: 50px;

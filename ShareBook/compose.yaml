@@ -52,21 +52,43 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro # Проброс директории с конфигом NGINX
     networks:
       - app-network
-  #Исправить настройку Реакт, открывается неверный порт.
+
+  redis:
+    image: redis:latest  
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  celery:
+    build:
+      context: .
+    command: celery -A ShareBook worker -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app-network
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  #Исправить настройку Реакт
   react:
     build:
       context: ../sharebooks-design
       dockerfile: Dockerfile
     environment:
       - TZ=Europe/Moscow
-      - NODE_ENV=development
-      - HOST=0.0.0.0  # Allows connection from outside the container
+      - NODE_ENV=production
+      #- NODE_ENV=development
+      #- HOST=0.0.0.0  # Allows connection from outside the container
     volumes:
-      - ../sharebooks-design:/app  # монтирование локальной папки для hot reload
-      
+      - ../sharebooks-design:/app  # монтирование локальной папки для hot reload  
     ports:
-      #- "3000:80"
-      - "3000:3000"
+      - "3000:80"
     #command: npm start
     depends_on:
       - server

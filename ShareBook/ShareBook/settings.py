@@ -258,3 +258,9 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False  
 EMAIL_HOST_USER = 'alexej.ivanov1084736@gmail.com'
 EMAIL_HOST_PASSWORD = 'agyi wuxr nckw yybm'
+
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'

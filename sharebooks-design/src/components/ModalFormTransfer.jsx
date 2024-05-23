@@ -43,7 +43,7 @@ const  ModalFormTransfer = ({ selectedBook, isOpen, setIsOpen }) =>{
     }
     setIsOpen(false);
     setConfirmLoading(false);
-    alert('Transfer successful!');
+    alert('Книга успешно передана другу на 14 дней!');
     navigate('/PersonalLibrary');
   };
   

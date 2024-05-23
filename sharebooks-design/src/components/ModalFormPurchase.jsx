@@ -30,7 +30,7 @@ export const ModalFormPurchase = ({ selectedBook, isOpen, setIsOpen }) =>{
     }
     setIsOpen(false);
     setConfirmLoading(false);
-    alert('Purchase successful!');
+    alert('Поздравляем, книга куплена и добавлена в вашу коллекцию!');
     navigate('/PaymentPage');
 };
   
