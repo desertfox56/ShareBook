@@ -1,8 +1,10 @@
 import React from 'react';
 import { Carousel } from 'antd';
 import { Image } from 'antd';
-import PictureHarryPotter from '../assets/img/HarryPotter.jpg'
-import PictureDonQuxote from '../assets/img/Don Quixote.jpg'
+import PictureHarryPotter from '../assets/img/HarryPotter.jpg';
+import PictureDonQuxote from '../assets/img/Don Quixote.jpg';
+import AizekAzimov from '../assets/img/AizekAzimov.jpeg';
+import Dostoevsky from '../assets/img/Dostoevsky.jpg';
 const contentStyle = {
   height: '300px', 
   display: 'flex',
@@ -41,11 +43,21 @@ function PopularBooks(){
                 />
                 <h3>Дон Кихот Описание</h3>
             </div>
-    <div>
-      <h3 style={contentStyle}>3</h3>
+    <div className='AizekAzimov' style={contentStyle}>
+    <Image
+                    style={imageStyle} 
+                    src={AizekAzimov}
+                    alt="Великие научно-фантастические рассказы 1939"
+                />
+      <h3>Великие научно-фантастические рассказы 1939 описание</h3>
     </div>
-    <div>
-      <h3 style={contentStyle}>4</h3>
+    <div className='Dostoevsky' style={contentStyle}>
+    <Image
+                    style={imageStyle} 
+                    src={Dostoevsky}
+                    alt="Преступление и наказание"
+                />
+      <h3>Преступление и наказание описание</h3>
     </div>
   </Carousel>
     );

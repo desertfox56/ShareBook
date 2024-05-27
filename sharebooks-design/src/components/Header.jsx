@@ -1,11 +1,14 @@
 import React from 'react';
 import { Layout, Menu, Image } from 'antd';
+import SearchBar from './Search';
 import '../assets/css/Header.css';
-import logo from '../assets/img/Logotype1.png';
+import logo from '../assets/img/ShareBookLogo.png';
 import { Link } from 'react-router-dom';
+import { useSearch } from '../context/searchContext';
 const { Header } = Layout;
 
 function AppHeader() {
+    const { handleSearch } = useSearch(); // Получаем функцию поиска из контекста
     return (
         <Header >
         <div className='Logo' >
@@ -17,6 +20,9 @@ function AppHeader() {
                 alt="ShareBook logo"
             /></Link>
         </div>
+        <div className='SearchBar'>
+                <SearchBar onSearch={handleSearch} />
+            </div>
         <div className='Nav' >
             <Menu mode="horizontal" theme="dark" defaultSelectedKeys={['1']}>
                 <Menu.Item key="1">

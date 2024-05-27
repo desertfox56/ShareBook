@@ -1,9 +1,15 @@
 import React from 'react';
-import { Card, Col, Row,Typography, Image, Avatar,Button } from 'antd';
-import { DollarOutlined,GiftOutlined,ReadOutlined, HeartOutlined  } from '@ant-design/icons';
+import { useSearch } from '../context/searchContext';
+import { Card, Image, Avatar,Button } from 'antd';
+// import { DollarOutlined,GiftOutlined,ReadOutlined, HeartOutlined  } from '@ant-design/icons';
 //Добавить те же кнопки как и на странице маркетплейса?
 function ResultSearchBooks({ books }) {
     const { Meta } = Card;
+    const { searchResults, isSearched } = useSearch();
+
+    if (!isSearched) {
+        return null; // Не отображать компонент, если поиск не был выполнен
+    }
     const cardStyle = {
         width: '340px', // ширина карточки в процентах относительно родителя
         height: '650px',

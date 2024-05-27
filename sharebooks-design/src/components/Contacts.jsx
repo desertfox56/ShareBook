@@ -1,9 +1,15 @@
-import React from 'react';
-import { Alert, Form, Input,Button } from 'antd';
-
+import React,{useState} from 'react';
+import { Alert, Form, Input,Button,Checkbox } from 'antd';
+import axios from 'axios';
+import UserAgreementModal from './UserAgreement';
 const { TextArea } = Input;
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 24 },
+  },
+};
 
-/* eslint-disable no-template-curly-in-string */
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -14,30 +20,39 @@ const validateMessages = {
     range: '${label} must be between ${min} and ${max}',
   },
 };
-/* eslint-enable no-template-curly-in-string */
 
 function AppContacts(){
+  const [modalVisible, setModalVisible] = useState(false);
+  const [formData, setFormData] = useState({});
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+    axios.post('http://localhost:8000/api/users/feedback/', {
+        name: values.user.name,
+        email: values.user.email,
+        subject: "Sharebook", // subject статичен
+        message: values.user.introduction
+    })
+    .then(response => {
+        alert('Сообщение успешно отправлено!');
+        console.log('Response:', response.data);
+    })
+    .catch(error => {
+        alert('Ошибка при отправке сообщения: ' + error.message);
+        console.error('Error:', error);
+    });
+};
+
     return(
       <div className='Contacts'>
-        <Form name="trigger"  layout="vertical" autoComplete="off" className='ContactsForm'>
+        <Form name="trigger"  layout="vertical" onFinish={onFinish} autoComplete="off" className='ContactsForm' validateMessages={validateMessages}>
     <Alert message="Напишите нам, если остались вопросы" style={{marginBottom:'2%'}} />
-
-    {/*<Form.Item
-      hasFeedback
-      label="Field A"
-      name="field_a"
-      validateTrigger="onBlur"
-      rules={[{ max: 3 }]}
-    >
-      <Input placeholder="Validate required onBlur" />
-    </Form.Item>*/}
 
     <Form.Item
       hasFeedback
       label="Ваше Имя"
       name={['user', 'name']}
       validateDebounce={1000}
-      rules={[{ max: 20,required: true }]}
+      rules={[{ required: true, message: 'Введите ваше имя!', max: 50 }]}
     >
       <Input placeholder="Как к вам обращаться?" />
     </Form.Item>
@@ -47,7 +62,7 @@ function AppContacts(){
       label="Email"
       name={['user', 'email']}
       validateDebounce={1000}
-      rules={[{ max: 3,type: 'email' }]}
+      rules={[{ type: 'email', required: true, message: 'Введите корректный email!' }]}
     >
       <Input placeholder="Ваш email" />
     </Form.Item>
@@ -57,25 +72,36 @@ function AppContacts(){
       label="Вопрос"
       name={['user', 'introduction']}
       validateDebounce={1000}
-      rules={[{ max: 3 }]}
+      rules={[{ required: true, message: 'Введите ваш вопрос!', min: 5, max: 300 }]}
     >
        <TextArea rows={4} />
     </Form.Item>
 
-    
-      <Button type="primary"  htmlType="submit">
+    <Form.Item
+        name="agreement"
+        valuePropName="checked"
+        rules={[
+          {
+            validator: (_, value) =>
+              value ? Promise.resolve() : Promise.reject(new Error('Вы должны ознакомиться с соглашением')),
+          },
+        ]}
+        {...tailFormItemLayout}
+      ><div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width:'100%' }}>
+        
+        <Checkbox onChange={e => setFormData({ ...formData, agreement: e.target.checked })}>
+          Я прочитал <a onClick={() => setModalVisible(true)}>соглашение</a>
+        </Checkbox>
+        <Button type="primary" className="SubmitButton" htmlType="submit">
         Отправить
       </Button>
-    
-    {/*<Form.Item
-      hasFeedback
-      label="Field C"
-      name="field_c"
-      validateFirst
-      rules={[{ max: 6 }, { max: 3, message: 'Continue input to exceed 6 chars' }]}
-    >
-      <Input placeholder="Validate one by one" />
-  </Form.Item>*/}
+      <UserAgreementModal
+          visible={modalVisible}
+          setVisible={setModalVisible}
+         
+        />
+      </div>
+        </Form.Item>
   </Form></div>
     );
 }

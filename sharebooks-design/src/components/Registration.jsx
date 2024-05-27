@@ -11,6 +11,7 @@ import {
   Row,
   Select,
 } from 'antd';
+import UserAgreementModal from './UserAgreement';
 
 const { Option } = Select;
 const tailFormItemLayout = {
@@ -40,6 +41,7 @@ const validateMessages = {
 
 function Registration(){
   const navigate=useNavigate();
+  const [modalVisible, setModalVisible] = useState(false);
  const onFinish = async (values) => {
 
     console.log('Form values:', values); // Добавляем эту строку
@@ -97,6 +99,7 @@ function Registration(){
         initialValues={{ remember: true }}
         autoComplete="off"
         onFinish={onFinish} 
+        validateMessages={validateMessages}
       >
 
         <Form.Item 
@@ -172,13 +175,18 @@ function Registration(){
         {...tailFormItemLayout}
       >
         <Checkbox>
-          Я прочитал <a href="">соглашение</a>
+          Я прочитал <a onClick={() => setModalVisible(true)}>соглашение</a>
         </Checkbox>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" style={{textAlign:'center'}} htmlType="submit">
         Зарегистрироваться
         </Button>
+        <UserAgreementModal
+          visible={modalVisible}
+          setVisible={setModalVisible}
+         
+        />
       </Form.Item>
       </Form>
       </div>

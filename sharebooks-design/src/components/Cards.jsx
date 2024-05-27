@@ -1,5 +1,5 @@
 //Доделать
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { Card, Col, Row,Typography, Image, Avatar,Button } from 'antd';
 import { DollarOutlined,GiftOutlined,ReadOutlined, HeartOutlined  } from '@ant-design/icons';
 import '../assets/css/Cards.css';
@@ -75,7 +75,7 @@ const addBookToWishList = async (selectedBook) => {
     height: '280px', // фиксированная высота обложки
     objectFit: 'cover', // обрезка изображения по размеру контейнера
   };
-  const handleBookSelect = (book) => {
+  const handleBookSelect = useCallback((book) => {
     if (book && book.id) {
       localStorage.setItem('selectedBookId', book.id);
       setSelectedBook(book);
@@ -83,21 +83,21 @@ const addBookToWishList = async (selectedBook) => {
     } else {
       console.log('Attempted to select a book with undefined ID');
     }
-  };
-  const handlePurchaseClick = (book) => {
+  }, []);
+  const handlePurchaseClick = useCallback((book) => {
     setSelectedBook(book);
     setPurchaseModalVisible(true); // Opens the modal when a book is selected
-  };
-  const handleTransferClick = (book) => {
+  }, []);
+  const handleTransferClick = useCallback((book) => {
     setSelectedBook(book);
     setTransferModalVisible(true); // Opens the modal when a book is selected
-  };
-  const handleReadingClick=(book)=>{
+  }, []);
+  const handleReadingClick=useCallback((book)=>{
     if (selectedBook !== book) { // Проверяем, что выбранная книга действительно изменилась
       handleBookSelect(book);
     }
     navigate('/Reading');
-  }
+  }, [selectedBook, navigate, handleBookSelect])
 
     return(
       
@@ -118,7 +118,7 @@ const addBookToWishList = async (selectedBook) => {
         }
         actions={[
           <DollarOutlined key="buy" onClick={() => handlePurchaseClick(book)} />,
-          <ReadOutlined key="reading" onClick={handleReadingClick(book)} />,
+          <ReadOutlined key="reading" onClick={() => handleReadingClick(book)} />,
           <GiftOutlined key="gift" onClick={() => handleTransferClick(book)} />,
           <HeartOutlined key="wishlist" onClick={() => addBookToWishList(book)} style={{ color: 'red' }} />,
         ]}>

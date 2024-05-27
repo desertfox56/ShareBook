@@ -1,3 +1,5 @@
+import React from 'react';
+import { SearchProvider } from './context/searchContext';
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppHeader from './components/Header.jsx';
@@ -18,10 +20,12 @@ import OurProjectPage from './pages/OurProjects.jsx';
 import ResetPasswordForm from './pages/ResetPasswordPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import WishPage from './pages/WishPage.jsx';
-
+import SearchResultsPage from './pages/SearchResultPage.jsx';
 function App() {
+  
   return (
     <BrowserRouter>
+    <SearchProvider>
      <div className="App">
         <AppHeader />
       <div className="content-with-fixed-header">
@@ -31,6 +35,7 @@ function App() {
        </Route>
         {/* <Route path="/" element={<AppHeader />} /> */}
         {/* другие маршруты */}
+        <Route path="search-results/" element={<SearchResultsPage />} />
         <Route path='contacts/' element={<ContactsPage/>}></Route>
         <Route path='OurProjects/' element={<OurProjectPage/>}></Route>
         <Route path='FAQ/' element={<FAQPage/>}> </Route>
@@ -50,7 +55,7 @@ function App() {
       </Routes>
       </div>
       <AppFooter />
-      </div>
+      </div></SearchProvider>
     </BrowserRouter>
   );
 }

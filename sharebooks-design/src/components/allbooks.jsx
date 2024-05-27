@@ -1,6 +1,7 @@
-import React, { useState,useEffect } from 'react';
-import { MenuUnfoldOutlined  } from '@ant-design/icons';
+import React, { useState,useEffect, useCallback} from 'react';
+import { MenuUnfoldOutlined,GiftOutlined  } from '@ant-design/icons';
 import { Menu, Avatar } from 'antd';
+import ModalFormTransfer from './ModalFormTransfer';
 import axios from 'axios';
 
 function getItem(label, key, icon, children, type) {
@@ -14,7 +15,9 @@ function getItem(label, key, icon, children, type) {
   }
   const AllBooks = () => {
     const [books, setBooks] = useState([]); // Состояние для хранения книг
-    const [current, setCurrent] = useState('1');
+    
+    const [selectedBook, setSelectedBook] = useState(null);
+    const [isTransferModalVisible, setTransferModalVisible] = useState(false);
     
   useEffect(() => {
     const fetchUserData = async () => {
@@ -28,9 +31,6 @@ function getItem(label, key, icon, children, type) {
           // Здесь может быть код для перенаправления на страницу входа
           return;
         }
-
-        
-        
 
         // Добавляем токен в заголовки запроса
         const headers = {
@@ -55,16 +55,22 @@ function getItem(label, key, icon, children, type) {
     fetchUserData();
   }, []); // Запрос выполняется один раз при монтировании компонента
 
-  const onClick = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
-
+  
+  const handleTransferClick = useCallback((userBook,e) => {
+    e.stopPropagation(); // Stop propagation to prevent menu item click
+    setSelectedBook(userBook);
+    setTransferModalVisible(true);
+  }, []);
   // Функция для создания пунктов меню из полученных книг
   const bookMenuItems = books.map(userBook => ({
     key: userBook.book.id.toString(), // Corrected from setBooks.id to book.id
     icon: <Avatar size="small" src={userBook.book.image} style={{ marginRight: 8 }} />,
-    label: userBook.book.title, // Corrected from setBooks.title to book.title
+    label: (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        {userBook.book.title}
+        <GiftOutlined onClick={(e) => handleTransferClick(userBook,e)} style={{ color: '#f56a00', marginLeft: 10 }} />
+      </div>
+    ),
   }));
 
   //Подменю
@@ -74,16 +80,23 @@ function getItem(label, key, icon, children, type) {
   
     return (
         <>
-          
           <Menu
             theme={'light'}
-            onClick={onClick}
+            
             style={{ width: 256 }}
             defaultOpenKeys={['sub1']}
-            selectedKeys={[current]}
+            
             mode="inline"
             items={items}
           />
+                {selectedBook && (
+        <ModalFormTransfer
+          selectedBook={selectedBook}
+          isVisible={isTransferModalVisible}
+          setIsVisible={setTransferModalVisible}
+        />
+      )}
+
         </>
       );
     };
