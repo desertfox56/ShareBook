@@ -17,6 +17,7 @@
 
 
 version: '3.11.4'
+
 networks:
   app-network:
     driver: bridge
@@ -37,6 +38,9 @@ services:
       - media_volume:/app/media
     networks:
       - app-network
+    env_file:
+      - ./ShareBook/.env
+
 
   nginx:
     image: nginx:1.25.4  # Использование официального образа Nginx
@@ -52,6 +56,9 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro # Проброс директории с конфигом NGINX
     networks:
       - app-network
+    env_file:
+      - ./ShareBook/.env
+
 
   redis:
     image: redis:latest  
@@ -59,6 +66,8 @@ services:
       - "6379:6379"
     networks:
       - app-network
+    env_file:
+      - ./ShareBook/.env
 
   celery:
     build:
@@ -74,6 +83,8 @@ services:
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    env_file:
+      - ./ShareBook/.env
 
   #Исправить настройку Реакт
   react:
@@ -94,6 +105,9 @@ services:
       - server
     networks:
       - app-network
+    env_file:
+      - ./ShareBook/.env
+
 
   db:
     image: postgres
@@ -104,9 +118,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
-      - TZ=Europe/Moscow
+      - TZ=${TIME_ZONE}
       - POSTGRES_DB=ShareBook
-      - POSTGRES_PASSWORD='h%aRulfwwfOhO0k'
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     expose:
       - 5432
     healthcheck:
@@ -116,11 +130,11 @@ services:
       retries: 5
     networks:
       - app-network
+    env_file:
+      - ./ShareBook/.env
+
 volumes:
   db-data: 
   static_volume:
   media_volume:
 
-#secrets:
-  #db-password:
-    #file: db/password.txt

@@ -26,7 +26,7 @@ function AppContacts(){
   const [formData, setFormData] = useState({});
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    axios.post('http://localhost:8000/api/users/feedback/', {
+    axios.post('${process.env.REACT_APP_API_URL}/users/feedback/', {
         name: values.user.name,
         email: values.user.email,
         subject: "Sharebook", // subject статичен

@@ -28,7 +28,7 @@ const ResetPasswordForm=()=>{
             }
             const headers = { Authorization: `JWT ${token}` };
               
-          const response = await axios.post('http://localhost/api/users/reset_password/', { email },{headers});
+          const response = await axios.post('${process.env.REACT_APP_API_URL}/users/reset_password/', { email },{headers});
           console.log(response.data);
           if (response.status === 200) {
             // Email sent successfully
@@ -44,7 +44,7 @@ const ResetPasswordForm=()=>{
       };
     const resetPassword = async () => {
         try {
-          const response = await axios.put('http://localhost/api/users/reset_password/', {
+          const response = await axios.put('${process.env.REACT_APP_API_URL}/users/reset_password/', {
             email,
             otp,
             new_password: newPassword,

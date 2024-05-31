@@ -23,7 +23,7 @@ const Cards =()=>{
     const fetchBooks = async () => {
         try {
   
-            const response = await axios.get('http://localhost:8000/api/marketplace/allbooks/');
+            const response = await axios.get('${process.env.REACT_APP_API_URL}/marketplace/allbooks/');
             setBooks(response.data.results);
             
         } catch (error) {
@@ -49,7 +49,7 @@ const addBookToWishList = async (selectedBook) => {
 
     const headers = { Authorization: `JWT ${token}` };
     const selectedBookId = selectedBook ? selectedBook.id : null;
-    const wishListUrl = `http://localhost:8000/api/myBooks/wishlist/${selectedBookId}/`;
+    const wishListUrl = `${process.env.REACT_APP_API_URL}/myBooks/wishlist/${selectedBookId}/`;
     await axios.post(wishListUrl, {}, { headers });
 
     console.log('WishList adding successful');

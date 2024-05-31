@@ -38,7 +38,7 @@ function getItem(label, key, icon, children, type) {
         };
 
         // Формируем URL для запроса данных профиля пользователя
-        const userPersonalLibraryUrl = `http://localhost:8000/api/myBooks/personal-library/`;
+        const userPersonalLibraryUrl = `${process.env.REACT_APP_API_URL}/myBooks/personal-library/`;
 
         // Отправляем запрос на сервер для получения данных пользователя
         const response = await axios.get(userPersonalLibraryUrl, { headers });

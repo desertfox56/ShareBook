@@ -31,7 +31,7 @@ export const FiltersProvider = ({ children }) => {
 
     const fetchFilteredBooks = useCallback((filterParams) => {
         console.log('Fetching filtered books with params:', filterParams);
-        axios.get(`http://localhost:8000/api/marketplace/Filter/?${filterParams}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/marketplace/Filter/?${filterParams}`)
             
             .then(response => {
                 console.log('Filtered books received:', response.data.results);
@@ -45,9 +45,9 @@ export const FiltersProvider = ({ children }) => {
     const fetchMetadata = useCallback(() => {
         console.log('Fetching metadata for genres, languages, and authors');
       Promise.all([
-        axios.get('http://localhost:8000/api/marketplace/genres/'),
-        axios.get('http://localhost:8000/api/marketplace/languages/'),
-        axios.get('http://localhost:8000/api/marketplace/authors/')
+        axios.get('${process.env.REACT_APP_API_URL}/marketplace/genres/'),
+        axios.get('${process.env.REACT_APP_API_URL}/marketplace/languages/'),
+        axios.get('${process.env.REACT_APP_API_URL}/marketplace/authors/')
       ]).then(([genreRes, languageRes, authorRes]) => {
         console.log('Author data before processing:', authorRes.data.results);
         const newFilters = {

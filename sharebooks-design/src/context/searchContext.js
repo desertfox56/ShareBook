@@ -18,7 +18,7 @@ export const SearchProvider = ({ children }) => {
         }
 
         setIsSearched(true);
-        const apiUrl = 'http://localhost:8000/api/marketplace/search';
+        const apiUrl = '${process.env.REACT_APP_API_URL}/marketplace/search';
         const params = { title: value };
 
         axios.get(apiUrl, { params })

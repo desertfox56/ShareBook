@@ -20,9 +20,10 @@ export const ModalFormPurchase = ({ selectedBook, isOpen, setIsOpen }) =>{
         }
         const headers = { Authorization: `JWT ${token}` };
         const selectedBookId = selectedBook ? selectedBook.id : null;
-        const PurchaseUrl = `http://localhost:8000/api/myBooks/purchase/${selectedBookId}/`;
+        const PurchaseUrl = `${process.env.REACT_APP_API_URL}myBooks/purchase/${selectedBookId}/`;
+        //const PurchaseUrl = `http://localhost:8000/api/myBooks/purchase/${selectedBookId}/`;
+        //const purchaseUrl = `${process.env.REACT_APP_API_URL}/myBooks/purchase/${selectedBookId}/`;
         await axios.post(PurchaseUrl, {}, { headers });
-        
         console.log('Purchase successful');
         
     } catch (error) {

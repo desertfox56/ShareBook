@@ -25,7 +25,7 @@ const LogIn=()=>{
     console.log('Form values:', values); // Добавляем эту строку
     try {
       // Отправляем запрос на Django API для получения токенов
-      const response = await axios.post('http://localhost:8000/api/users/api/token/', values, { withCredentials: true });
+      const response = await axios.post('${process.env.REACT_APP_API_URL}/users/api/token/', values, { withCredentials: true });
       console.log('Login successful', response.data);
 
       // Получаем токен доступа из ответа

@@ -25,7 +25,7 @@ function Intro(){
             </div>
 
             <div className='IntroCenterCard' style={{display: 'flex',textAlign:'center', flexDirection: 'column', alignItems: 'center', width: '30%'}}>
-                <Title level={2}>Онлайн библиотека-ShareBooks</Title>
+                <Title level={2}>Онлайн библиотека-ShareBook</Title>
                 <Title level={3}>Читать теперь стало удобнее на нашем сайте</Title>
                 <Button type="primary"  style={{backgroundColor:'#13C2C2'}}>
                 <Link to="/login/">Читать сейчас</Link>

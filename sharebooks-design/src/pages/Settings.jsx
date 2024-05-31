@@ -25,7 +25,7 @@ const Settings = () => {
       const headers = {
         Authorization: `JWT ${token}`,
       };
-      const response = await axios.post('http://localhost:8000/api/users/change_password/', {
+      const response = await axios.post('${process.env.REACT_APP_API_URL}/users/change_password/', {
         email: values.email,
         password: values.currentPassword,
         new_password: values.newPassword,
@@ -59,7 +59,7 @@ const Settings = () => {
       const headers = {
         Authorization: `JWT ${token}`,
       };
-      const response = await axios.delete('http://localhost:8000/api/users/delete-account/',{ headers });
+      const response = await axios.delete('${process.env.REACT_APP_API_URL}/users/delete-account/',{ headers });
       console.log(response.data.message);
       navigate('/');
     } catch (error) {

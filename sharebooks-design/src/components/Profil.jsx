@@ -35,7 +35,7 @@ const UserProfile = () => {
         };
 
         // Формируем URL для запроса данных профиля пользователя
-        const userProfileUrl = `http://localhost:8000/api/users/user_profile/${userId}/`;
+        const userProfileUrl = `${process.env.REACT_APP_API_URL}/users/user_profile/${userId}/`;
 
         // Отправляем запрос на сервер для получения данных пользователя
         const response = await axios.get(userProfileUrl, { headers });
@@ -55,7 +55,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
       const refreshToken = localStorage.getItem('RefreshToken');
       try {
-          await axios.post('http://localhost:8000/api/users/api/logout/', {
+          await axios.post('${process.env.REACT_APP_API_URL}/users/api/logout/', {
               refresh_token: refreshToken
           }, {
               headers: {

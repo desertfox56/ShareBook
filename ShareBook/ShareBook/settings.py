@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from decouple import config
 from pathlib import Path
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)03f1=qjr8&9k%3jpa0#ev1**ds&u6-e)oxlsv5vmeik#_s8j+'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['share-book.ru', 'www.share-book.ru','ftp.share-book.ru.','mail.share-book.ru.','smtp.share-book.ru.','pop.share-book.ru.', 'localhost','127.0.0.1']
 
 
 # Application definition
@@ -106,7 +107,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ShareBook',
         'USER': 'postgres',
-        'PASSWORD': 'h%aRulfwwfOhO0k',
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'db',
         'PORT': '5432',
     }
@@ -168,7 +169,7 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": False,
 
     "ALGORITHM": "HS256",
-    "SIGNING_KEY": "django-insecure-)03f1=qjr8&9k%3jpa0#ev1**ds&u6-e)oxlsv5vmeik#_s8j+",
+    "SIGNING_KEY": config('JWT_SIGNING_KEY'),
     "VERIFYING_KEY": "",
     "AUDIENCE": None,
     "ISSUER": None,
@@ -212,8 +213,10 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React порт
-    "http://localhost:8000",  # Django порт
+    "http://share-book.ru/",
+    "https://www.share-book.ru",
+    # "http://localhost:3000",  # React порт
+    # "http://localhost:8000",  # Django порт
 ]
 
 CORS_ALLOW_METHODS = [
@@ -257,7 +260,7 @@ EMAIL_PORT = 587  # для использования TLS, 465 для SSL
 EMAIL_USE_TLS = True  
 EMAIL_USE_SSL = False  
 EMAIL_HOST_USER = 'alexej.ivanov1084736@gmail.com'
-EMAIL_HOST_PASSWORD = 'agyi wuxr nckw yybm'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Celery Configuration
 CELERY_BROKER_URL = 'redis://redis:6379/0'

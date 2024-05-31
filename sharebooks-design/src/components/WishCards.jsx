@@ -24,7 +24,7 @@ function WishCards(){
               return;
           }
             const headers = { Authorization: `JWT ${token}` };
-            const WishListLibraryUrl ='http://localhost:8000/api/myBooks/wishlist-library/';
+            const WishListLibraryUrl ='${process.env.REACT_APP_API_URL}/myBooks/wishlist-library/';
             const response = await axios.get(WishListLibraryUrl, { headers });
             if (response.data && response.data.wish_books) {
               setBooks(response.data.wish_books);
@@ -61,7 +61,7 @@ function WishCards(){
         cover={
           <Image
             alt="example"
-            src={book.book.image ? `http://localhost:8000${book.book.image}` : PictureDonQuxote}
+            src={book.book.image ? `${process.env.REACT_APP_API_URL}${book.book.image}` : PictureDonQuxote}
             height="40%"
             width="100%"
             style={coverImageStyle}
@@ -75,7 +75,7 @@ function WishCards(){
           <LockOutlined />
         ]}>
           <Meta
-      avatar={<Avatar src={book.book.avatar ? `http://localhost:8000${book.book.avatar}` : ServantesAvatar} />}
+      avatar={<Avatar src={book.book.avatar ? `${process.env.REACT_APP_API_URL}${book.book.avatar}` : ServantesAvatar} />}
       title={null}
       description={
         <div>

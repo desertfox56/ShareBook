@@ -28,7 +28,7 @@ const  ModalFormTransfer = ({ selectedBook, isOpen, setIsOpen }) =>{
         }
         const headers = { Authorization: `JWT ${token}` };
         const selectedBookId = selectedBook ? selectedBook.id : null;
-        const TransferUrl = `http://localhost:8000/api/myBooks/transfer_book/`;
+        const TransferUrl = `${process.env.REACT_APP_API_URL}/myBooks/transfer_book/`;
         await axios.post(TransferUrl, {
             giver_user_id: userId,
             receiver_user_email: friend_mail,
