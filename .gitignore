@@ -1,0 +1,6 @@
+# Исключение папки db
+ShareBook/db/
+
+# Исключение файлов .env
+ShareBook/ShareBook/.env
+sharebooks-design/.env
