@@ -45,9 +45,9 @@ export const FiltersProvider = ({ children }) => {
     const fetchMetadata = useCallback(() => {
         console.log('Fetching metadata for genres, languages, and authors');
       Promise.all([
-        axios.get('${process.env.REACT_APP_API_URL}/marketplace/genres/'),
-        axios.get('${process.env.REACT_APP_API_URL}/marketplace/languages/'),
-        axios.get('${process.env.REACT_APP_API_URL}/marketplace/authors/')
+        axios.get(`${process.env.REACT_APP_API_URL}/marketplace/genres/`),
+        axios.get(`${process.env.REACT_APP_API_URL}/marketplace/languages/`),
+        axios.get(`${process.env.REACT_APP_API_URL}/marketplace/authors/`)
       ]).then(([genreRes, languageRes, authorRes]) => {
         console.log('Author data before processing:', authorRes.data.results);
         const newFilters = {

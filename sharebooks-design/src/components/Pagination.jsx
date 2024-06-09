@@ -7,7 +7,7 @@ function AppPagination(){
   useEffect(() => {
     const fetchTotalBooks = async () => {
       try {
-        const response = await axios.get('${process.env.REACT_APP_API_URL}/marketplace/pagination/');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/marketplace/pagination/`);
         setTotalBooks(response.data.count);
       } catch (error) {
         console.error('Error counting pages:', error);

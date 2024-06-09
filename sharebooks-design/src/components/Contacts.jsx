@@ -26,7 +26,7 @@ function AppContacts(){
   const [formData, setFormData] = useState({});
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    axios.post('${process.env.REACT_APP_API_URL}/users/feedback/', {
+    axios.post(`${process.env.REACT_APP_API_URL}/users/feedback/`, {
         name: values.user.name,
         email: values.user.email,
         subject: "Sharebook", // subject статичен
@@ -48,6 +48,7 @@ function AppContacts(){
     <Alert message="Напишите нам, если остались вопросы" style={{marginBottom:'2%'}} />
 
     <Form.Item
+    className='ContactsItem'
       hasFeedback
       label="Ваше Имя"
       name={['user', 'name']}

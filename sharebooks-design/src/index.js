@@ -4,15 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { FiltersProvider } from './context/FiltersContext';
-
+import { DeviceProvider } from './context/MobileResponsible';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    
+    <DeviceProvider>
     <FiltersProvider>
     <App />
     </FiltersProvider>
-    
+    </DeviceProvider>
   </React.StrictMode>
 );
 

@@ -47,7 +47,7 @@ function Registration(){
     console.log('Form values:', values); // Добавляем эту строку
     try {
         // Отправляем запрос на Django API для регистрации и получения токена
-        const response = await axios.post('${process.env.REACT_APP_API_URL}/users/register/', values, { withCredentials: true });
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/register/`, values, { withCredentials: true });
         
         if (response.status === 200) {
           console.log('Registration successful', response.data);

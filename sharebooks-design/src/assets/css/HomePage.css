@@ -1,34 +1,171 @@
 .Intro{
-    display: 'flex';
-    justify-content: 'space-around';
-    width: '100%';
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
     
 }
-.IntroLeftCard{
-    display: 'flex';
-    flex-direction: 'column';
-    align-items: 'center';
-    width: '30%';
+ .intro-image {
+    width: 80%;   /* Базовый размер на десктопе */
+    height: 70%; /* Сохраняем пропорции изображения */
+    max-width: 300px; /* Максимальная ширина изображения для контроля размера */
+    max-height: 500px;
+    margin-bottom: 10px; /* Добавляем пространство между изображением и текстом */
 }
-.IntroLeftCard .ant-typography {
-    margin-top: -17%; 
-    z-index: 1; 
+.IntroLeftCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    
 }
 
+.IntroTitle {
+    text-align: center; /* Выравнивание заголовков */
+    margin: 8px 0 !important; /* Пространство сверху и снизу */
+}
 .IntroCenterCard{
-    display: 'flex';
-    text-align:'center';
-    flex-direction: 'column';
-    align-items: 'center';
-    width: '30%';
+    display: flex;
+    text-align:center;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
 }
 .IntroRightCard{
-    display: 'flex';
-    flex-direction: 'column';
-    align-items: 'center';
-    width: '30%';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
 }
 .IntroRightCard .ant-typography {
     margin-top: -17%; 
     z-index: 1; 
 }
+.section-content {
+    max-width: 300px;
+    display: block; /* Обеспечить применение ширины */
+    text-align: justify;
+    margin: 0 auto;
+}
+
+.section-image {
+    display: block;
+    margin: 0 auto;
+}
+.SectionImage{
+    height: 150px !important;
+    width: 150px !important;
+}
+.section-heading {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.section-row {
+    row-gap: 2rem;
+}
+@media (max-width: 768px) {
+    .Home{
+        width: 100%;
+    }
+    .Intro {
+        flex-direction: column;
+        padding: 30px; /* Добавьте отступы для мобильных версий */
+    }
+    .IntroLeftCard,.IntroRightCard .intro-image {
+        width: 90%;   /* На маленьких устройствах изображение занимает всю доступную ширину */
+        
+    }
+    .Intro p {
+        font-size: 8px; /* Меньший размер шрифта для мобильных устройств */
+    }
+    .IntroLeftCard p, .IntroLeftCard .ant-typography {
+        width: 100%;  /* Задаем ширину текста равной ширине родителя */
+        text-align: justify; /* Выравнивание текста для лучшего восприятия */
+        padding: 0 12px; /* Устанавливаем паддинги для отступов внутри карточки */
+        margin: 0 auto; /* Центрируем текст внутри блока */
+        max-width: 300px; /* Максимальная ширина текста, чтобы он не растягивался слишком сильно на больших экранах */
+    }
+    .IntroRightCard p, .IntroRightCard, .IntroCenterCard .ant-typography {
+        width: 100%;  /* Задаем ширину текста равной ширине родителя */
+        text-align: justify; /* Выравнивание текста для лучшего восприятия */
+        margin: 0 auto; /* Центрируем текст внутри блока */
+        max-width: 300px; /* Максимальная ширина текста, чтобы он не растягивался слишком сильно на больших экранах */
+    }
+    .IntroTitle {
+        font-size: 19px !important; /* Адаптация заголовков */
+        margin-top:  10px !important;
+        margin-bottom: 10px !important;
+        text-align: center !important;
+    }
+    .IntroLeftCard, .IntroCenterCard, .IntroRightCard {
+        width: 100%; /* Каждый блок занимает всю ширину на мобильных устройствах */
+        margin-bottom: 20px; /* Добавьте отступы между блоками */
+    }
+
+    .IntroLeftCard .ant-typography, .IntroRightCard .ant-typography {
+        margin-top: 0; /* Уберите отрицательный отступ на мобильных устройствах */
+    }
+/*About_us*/
+.card-section {
+    padding: 10px;
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+}
+
+.welcome-section {
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+}
+
+.welcome-image {
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.section-col {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    max-width: 300px;
+}
+
+.section-content {
+    display: flex;
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.section-heading {
+    font-size: 1.2rem;
+}
+
+.section-row {
+    display: block; /* Отменить flex для мобильных устройств */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+ /* Отключить ant-display:block */
+    .ant-row {
+        width: 100% !important;
+        
+    }
+
+    .ant-col {
+        width: 100% !important;
+        display: block !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+.ant-image{
+   
+   display: flex;
+}
+}
+

@@ -3,6 +3,7 @@ import { SearchProvider } from './context/searchContext';
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppHeader from './components/Header.jsx';
+import ResponsiveMenu from './components/MobileHeader.jsx';
 import AppFooter from './components/Footer';
 import HomePage from './pages/HomePage';
 import ContactsPage from './pages/Contacts';
@@ -27,7 +28,7 @@ function App() {
     <BrowserRouter>
     <SearchProvider>
      <div className="App">
-        <AppHeader />
+        <ResponsiveMenu />
       <div className="content-with-fixed-header">
       <Routes>
       <Route index element={<HomePage />}> 
@@ -55,7 +56,8 @@ function App() {
       </Routes>
       </div>
       <AppFooter />
-      </div></SearchProvider>
+      </div>
+      </SearchProvider>
     </BrowserRouter>
   );
 }

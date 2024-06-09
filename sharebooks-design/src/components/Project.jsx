@@ -55,7 +55,7 @@ const items = [
 ];
 function Project(){
     return(
-        <div className='OurProjects' style={{display:'flex',width:'45%',height:'79%', marginBottom:'3%',marginLeft:'3%'}}>
+        <div className='OurProjects' >
         <Descriptions title="Sharebook" layout="vertical" theme="light" size='small' bordered  column={1} items={items} />
         </div>
     );

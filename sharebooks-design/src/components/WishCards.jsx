@@ -24,7 +24,7 @@ function WishCards(){
               return;
           }
             const headers = { Authorization: `JWT ${token}` };
-            const WishListLibraryUrl ='${process.env.REACT_APP_API_URL}/myBooks/wishlist-library/';
+            const WishListLibraryUrl =`${process.env.REACT_APP_API_URL}/myBooks/wishlist-library/`;
             const response = await axios.get(WishListLibraryUrl, { headers });
             if (response.data && response.data.wish_books) {
               setBooks(response.data.wish_books);

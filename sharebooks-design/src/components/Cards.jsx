@@ -23,7 +23,7 @@ const Cards =()=>{
     const fetchBooks = async () => {
         try {
   
-            const response = await axios.get('${process.env.REACT_APP_API_URL}/marketplace/allbooks/');
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/marketplace/allbooks/`);
             setBooks(response.data.results);
             
         } catch (error) {

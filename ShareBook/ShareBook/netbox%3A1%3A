@@ -1,0 +1,5 @@
+SECRET_KEY=django-insecure-03f1=qjr8&9k%3jpa0#ev1**ds&u6-e)oxlsv5vmeik#_s8j+
+DB_PASSWORD=h%aRulfwwfOhO0k
+JWT_SIGNING_KEY=django-insecure-03f1=qjr8&9k%3jpa0#ev1**ds&u6-e)oxlsv5vmeik#_s8j+
+EMAIL_HOST_PASSWORD=agyi wuxr nckw yybm
+TIME_ZONE=Europe/Moscow

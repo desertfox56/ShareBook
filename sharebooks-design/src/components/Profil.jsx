@@ -55,7 +55,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
       const refreshToken = localStorage.getItem('RefreshToken');
       try {
-          await axios.post('${process.env.REACT_APP_API_URL}/users/api/logout/', {
+          await axios.post(`${process.env.REACT_APP_API_URL}/users/api/logout/`, {
               refresh_token: refreshToken
           }, {
               headers: {

@@ -7,6 +7,7 @@ import PictureDonQuxote from '../assets/img/Don Quixote.jpg';
 import ServantesAvatar from '../assets/img/migel-de-servantes.jpg';
 import PictureRobinsonCrusoe from '../assets/img/RobinsonCrusoe.jpg';
 import DefoeAvatar from '../assets/img/DanielDefoe.jpg';
+
 //import PictureAncientGreekMythos from '../assets/img/AncientGreekMythos.jpg';
 //import SchwabAvatar from '../assets/img/GustavSchwab.jpg';
 
@@ -28,6 +29,7 @@ function Cards2(){
   };
     return(
       <Row gutter={16} className='Row2'>
+        
       <Col span={8} >
         <Card  bordered={false} style={cardStyle} className="custom-card2"
         cover={
@@ -53,6 +55,7 @@ function Cards2(){
           <div style={{ marginBottom: '16px' }}>
             <Button  style={{ marginTop: '8px' }}>Мигель де Сервантес</Button> {/* Кнопка автора */}
             <Button >Роман</Button> {/* Кнопка жанра */}
+            
           </div>
           <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold',color:'#1F1F1F' }}>
         Дон Кихот
