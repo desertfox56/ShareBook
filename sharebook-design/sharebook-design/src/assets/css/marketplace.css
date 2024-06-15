@@ -1,0 +1,40 @@
+.marketplace-container {
+    display: flex;
+    align-items: flex-start; /* Выровняем содержимое поверху */
+    margin-right: 2%;
+    width: 99%;
+  }
+  
+  .filter-container {
+    width: 286px; /* Фиксированная ширина фильтра */
+    position: sticky;
+    top: 64px; /* Расстояние от верха страницы */
+    flex-shrink: 0; /* Предотвратим сжатие */
+    background-color: #d2d2d2; 
+    border-radius:  8px;
+  }
+  
+  .cards-container {
+    flex-grow: 1; /* Занимаем оставшееся пространство */
+    padding-left: 20px; /* Отступ от фильтра */
+  }
+  /* Медиа-запросы для устройств с максимальной шириной 768px (планшеты и мобильные) */
+  @media (max-width: 768px) {
+    .marketplace-container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  
+    .filter-container {
+      width: 286px;
+      position: sticky; /* Сделаем фиксированным */
+      top: 64px; /* Высота navbar */
+      margin-bottom: 0;
+      flex-shrink: 2; 
+    }
+  
+    .cards-container {
+      flex-grow: 1;
+      padding-left: 20px;
+    }
+  }

@@ -1,0 +1,23 @@
+.ModalContent {
+    padding: 20px;
+    line-height: 1.6;  
+    text-align: justify; 
+    overflow-y: auto; 
+    max-height: 400px; 
+}
+
+.ModalHeader {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.ModalSubHeader {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.ModalParagraph {
+    margin-bottom: 10px;
+}

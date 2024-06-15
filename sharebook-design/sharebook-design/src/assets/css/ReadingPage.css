@@ -1,0 +1,18 @@
+/* Определяем пользовательский шрифт 'Baskervville' */
+@font-face {
+    font-family: 'Baskervville'; /* Название шрифта */
+    src: local('Baskervville'), url('../fonts/Baskervville/Baskervville-Regular.ttf') format('truetype');  /* Путь к файлу шрифта и его формат */
+    font-weight: normal; /* Нормальное начертание шрифта */
+    font-style: normal; /* Нормальный стиль шрифта */
+  }
+
+/* Применяем шрифт 'Baskervville' ко всему тексту внутри компонента с классом 'book-reading-page' */
+.book-reading-page {
+  font-family: 'Baskervville', serif; /* Используем шрифт 'Baskervville' с запасным шрифтом 'serif' */
+}
+
+/* Применяем шрифт 'Baskervville' к элементам Typography из библиотеки Ant Design внутри компонента Collapse */
+.book-reading-page .ant-collapse-content .ant-typography {
+  font-family: 'Baskervville', serif; /* Используем шрифт 'Baskervville' с запасным шрифтом 'serif' */
+}
+

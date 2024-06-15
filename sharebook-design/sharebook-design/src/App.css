@@ -1,0 +1,47 @@
+.App {
+  text-align: left;
+  background-color: #F2F2F2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.content-with-fixed-header {
+  padding-top: 164px;
+  flex: 1; 
+}
+.AppFooter{
+  background-color: #1797A6;
+  color: #0D0D0D; 
+}
+
+/* Медиа-запросы для устройств с максимальной шириной 768px (планшеты и мобильные) */
+@media (max-width: 768px) {
+  .App {
+    background-color: #EFEFEF; /* Светлый фон для мобильных устройств */
+    width: 100%; /* Обеспечиваем, чтобы App занял всю ширину */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%; 
+  }
+
+  .content-with-fixed-header {
+    padding-top: 100px; /* Меньше пространства наверху для мобильных устройств */
+    width: 100% !important; /* Обеспечиваем, чтобы контент занял всю ширину */
+    max-width: 100%; /* Обеспечиваем, чтобы контент занял всю ширину */
+  }
+
+  .AppFooter {
+    background-color: #167896; 
+    width: 100%; 
+    
+  }
+}
+
+

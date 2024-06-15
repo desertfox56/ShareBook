@@ -1,0 +1,184 @@
+.Intro{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    
+}
+ .intro-image {
+    width: 100%;   
+    object-fit: cover;
+    height:300px; /* Сохраняем пропорции изображения */
+    max-width: 300px; /* Максимальная ширина изображения для контроля размера */
+    margin-bottom: 10px; /* Добавляем пространство между изображением и текстом */
+}
+.IntroLeftCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+.IntroTitle {
+    text-align: center; /* Выравниваем заголовки */
+    margin: 8px 0 !important; /* Пространство сверху и снизу */
+}
+.IntroCenterCard{
+    display: flex;
+    text-align:center;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+.IntroRightCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+.IntroLeftCard,.IntroRightCard .ant-image .ant-image-img{
+    height: 300px;
+}
+.IntroLeftCard .ant-image .ant-image-img{
+    height: 300px;
+}
+.IntroRightCard .ant-typography {
+    margin-top: -17%; 
+    z-index: 1; 
+}
+.section-content {
+    max-width: 300px;
+    display: block; /* Обеспечиваем применение ширины */
+    text-align: justify;
+    margin: 0 auto;
+}
+
+.section-image {
+    display: block;
+    margin: 0 auto;
+}
+.SectionImage{
+    height: 150px !important;
+    width: 150px !important;
+}
+.section-heading {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.section-row {
+    row-gap: 2rem;
+}
+/* Медиа-запросы для устройств с максимальной шириной 768px (планшеты и мобильные) */
+@media (max-width: 768px) {
+    /* Intro */
+    .Home{
+        width: 100%;
+    }
+    .Intro {
+        flex-direction: column;
+       
+    }
+    .IntroLeftCard,.IntroRightCard .intro-image {
+        width: 100%;   /* На маленьких устройствах изображение занимает всю доступную ширину */  
+    }
+    .IntroLeftCard,.IntroRightCard .ant-image .ant-image-img{
+        height: auto;
+    }
+    .Intro p {
+        font-size: 8px; /* Меньший размер шрифта для мобильных устройств */
+    }
+    .IntroLeftCard p, .IntroLeftCard .ant-typography {
+        width: 100%;  /* Задаем ширину текста равной ширине родителя */
+        text-align: justify; /* Выравниваем текст для лучшего восприятия */
+        padding: 0 12px; /* Устанавливаем паддинги для отступов внутри карточки */
+        margin: 0 auto; /* Центрируем текст внутри блока */
+        max-width: 300px; /* Максимальная ширина текста, чтобы он не растягивался слишком сильно на больших экранах */
+    }
+    .IntroRightCard p, .IntroRightCard, .IntroCenterCard .ant-typography {
+        width: 100%;  /* Задаем ширину текста равной ширине родителя */
+        text-align: justify; /* Выравниваем текст для лучшего восприятия */
+        margin: 0 auto; /* Центрируем текст внутри блока */
+        max-width: 300px; /* Максимальная ширина текста, чтобы он не растягивался слишком сильно на больших экранах */
+    }
+    /* Адаптация заголовков */
+    .IntroTitle {
+        font-size: 19px !important; 
+        margin-top:  10px !important;
+        margin-bottom: 10px !important;
+        text-align: center !important;
+    }
+    .IntroLeftCard, .IntroCenterCard, .IntroRightCard {
+        width: 100%; /* Каждый блок занимает всю ширину на мобильных устройствах */
+        margin-bottom: 20px; 
+    }
+
+    .IntroLeftCard .ant-typography, .IntroRightCard .ant-typography {
+        margin-top: 0; /* Убераем отрицательный отступ на мобильных устройствах */
+    }
+
+/*About_us*/
+.card-section {
+    padding: 10px;
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+    width: 100%;
+}
+
+.welcome-section {
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+}
+
+.welcome-image {
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.section-col {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    max-width: 100%;
+    text-align: center;
+}
+
+.section-content {
+    display: flex;
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.section-heading {
+    font-size: 1.2rem;
+}
+
+.section-row {
+    display: block; /* Отменяем flex для мобильных устройств */
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+
+ /* Отключаем ant-display:block */
+    .ant-row {
+        width: 100% !important;
+        
+    }
+
+    .ant-col {
+        width: 100% !important;
+        display: block !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+.ant-image{
+   display: flex;
+}
+}
+

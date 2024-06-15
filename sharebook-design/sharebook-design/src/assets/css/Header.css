@@ -1,0 +1,74 @@
+.ant-layout-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0; /* Убеждаемся, что header прикреплен к верху страницы */
+    z-index: 100; 
+    color: #0D0D0D;
+    margin-bottom: 64px;
+    background-color: #fafcfc; 
+}
+.Logo{
+    display: flex;
+    flex: 0 0 auto;
+    
+    align-items: center;
+    
+    flex: 0 0 auto; /* Логотип не будет растягиваться и сжиматься */
+    margin-right: auto; /* Отодвигаем логотип влево */
+}
+/* Стилизация навигационного меню */
+.Nav .ant-menu {
+    background-color: transparent; /* Прозрачный фон меню */
+  }
+
+.Nav{
+    display: flex;
+    justify-content: flex-end; /* Выравниваем навигационного меню по центру */
+    flex-grow: 1; /* Растягиваем навигационное меню на всё доступное пространство */  
+}
+
+/* Стилизация пунктов меню */
+.Nav .ant-menu-item {
+    color: #0D0D0D; /* Цвет текста пунктов меню */
+  }
+  
+  /* Цвет текста пунктов меню при наведении */
+  .Nav .ant-menu-item:hover {
+    color: #13c2c2 !important; /* Цвет при наведении */
+  }
+  
+  /* Цвет текста активного пункта меню */
+  .Nav .ant-menu-item-selected {
+    color: #0D0D0D; /* Цвет текста активного пункта меню */
+  }
+
+  /* Фон активного пункта меню при наведении */
+.Nav .ant-menu-item-selected:hover {
+    background-color: #13c2c2; /* Цвет для фона активного пункта меню при наведении */
+  }
+  
+  /* Стилизация пунктов меню при активном состоянии */
+.Nav .ant-menu-item-active,
+.Nav .ant-menu-item-selected,
+.Nav .ant-menu-item:hover,
+.Nav .ant-menu-item:focus,
+.Nav .ant-menu-item-active:hover,
+.Nav .ant-menu-item-selected:hover {
+    background-color: #106466; 
+    color: #ffffff; 
+}
+
+/* Измененяем фон для пункта меню, который находится под курсором */
+.Nav .ant-menu-item:hover {
+    background-color: #128A8C; 
+    color: #ffffff; 
+}
+
+/* Убираем подчеркивание при нажатии на элементы меню */
+.Nav .ant-menu-item:active {
+    border-bottom: none;
+}
+
