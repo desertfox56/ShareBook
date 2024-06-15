@@ -34,7 +34,10 @@ class Book(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='books')
     file = models.URLField(max_length=500)
+<<<<<<< HEAD
     price = models.DecimalField(max_digits=10, decimal_places=2)
+=======
+>>>>>>> backup-branch
     count_pages = models.IntegerField()
     age_restriction = models.IntegerField(null=True, blank=True,choices=AGE_RESTRICTIONS)
     language = models.ForeignKey(Language,on_delete=models.CASCADE)

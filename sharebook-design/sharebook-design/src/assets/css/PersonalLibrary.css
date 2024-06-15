@@ -1,0 +1,67 @@
+.SearchBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    width: 80%;
+    margin-left: -72%;   
+}
+.PersonalLibrary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+.Page_name {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.Filter_and_Books {
+    display: flex;
+    justify-content: space-between; 
+    align-items: start; 
+    width: 100%; 
+}
+
+.Filter_library {
+    width: 24%; 
+    padding: 20px; 
+}
+
+.all-books-section {
+    padding: 20px; 
+    width: 17%; 
+}
+
+.popular-books-section {
+    width: calc(52% - 80px); /* Расчитаем ширину */
+    padding: 20px;
+    
+    margin-left: 4%;
+    order: 2; 
+    text-align: center;
+}
+
+.ant-carousel .slick-dots li button::after{
+    color: #69B1FF;
+}
+/* Медиа-запросы для устройств с максимальной шириной 768px (планшеты и мобильные) */
+@media (max-width: 768px) {
+    .Filter_and_Books {
+        flex-direction: column; 
+    }
+    
+    .Filter_library, .all-books-section, .popular-books-section {
+        width: 100%; 
+        padding: 0;
+        margin-left:0;
+    }
+}
+
+
+
+

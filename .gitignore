@@ -1,6 +1,26 @@
+<<<<<<< HEAD
 # Исключение папки db
 ShareBook/db/
 
 # Исключение файлов .env
 ShareBook/ShareBook/.env
 sharebooks-design/.env
+=======
+# Исключения в Django Rest Framework
+ShareBook/db/
+ShareBook/marketplace/__pycache__/
+ShareBook/myBooks/__pycache__/
+ShareBook/users/__pycache__/
+ShareBook/ShareBook/__pycache__/
+ShareBook/media/
+ShareBook/static/
+ShareBook/venv
+ShareBook/entrypoint.sh
+# Исключение файлов .env
+ShareBook/ShareBook/.env
+sharebook-design/sharebook-design/.env
+
+
+
+
+>>>>>>> backup-branch

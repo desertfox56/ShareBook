@@ -4,7 +4,11 @@ from django.contrib.auth.models import User
 
 # Создаем класс менеджера пользователей
 class MyUserManager(BaseUserManager):
+<<<<<<< HEAD
     # Создаём метод для создания пользователя
+=======
+    # Создаем метод для создания пользователя
+>>>>>>> backup-branch
     def _create_user(self, email, password, **extra_fields):
         # Проверяем есть ли Email
         if not email: 
@@ -40,12 +44,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     patronymic = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True) # Статус активации
     is_staff = models.BooleanField(default=False) # Статус админа
+<<<<<<< HEAD
     otp = models.CharField(max_length=6, blank=True, null=True)
     otp_created_at = models.DateTimeField(blank=True, null=True)
     totp_secret = models.CharField(
         max_length=100,  # Adjust length as needed to accommodate the Base32 encoded key
         blank=True, null=True
     )
+=======
+    otp = models.CharField(max_length=6, blank=True, null=True) #otp поле
+    otp_created_at = models.DateTimeField(blank=True, null=True)
+    totp_secret = models.CharField(
+        max_length=100,  
+        blank=True, null=True
+    ) 
+>>>>>>> backup-branch
     USERNAME_FIELD = 'email' # Идентификатор для обращения 
     
  

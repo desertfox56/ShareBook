@@ -8,7 +8,10 @@ class BookSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
 
     def get_author_name(self, obj):
+<<<<<<< HEAD
         #return f"{obj.author.first_name} {obj.author.second_name} {obj.author.patronymic}"
+=======
+>>>>>>> backup-branch
          # Собираем части имени в список, пропуская None значения
         parts = [obj.author.first_name, obj.author.second_name, obj.author.patronymic]
         # Фильтруем список, убирая пустые или None значения

@@ -1,0 +1,87 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0 auto;
+    
+}
+/* Медиа-запросы для устройств с максимальной шириной 768px (планшеты и мобильные) */
+@media (max-width: 768px) {
+    .form {
+      
+      padding: 10px;
+    }
+  
+    .ant-form-item-label > label {
+      font-size: 14px;
+    }
+  
+    .ant-form-item {
+      width: 100%;
+    }
+  
+    .ant-input, .ant-input-password {
+      width: 100%;
+    }
+  
+    .ButtonForm {
+      width: 50%;
+    }
+    .basic_remember {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .login-form-forgot {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+      }
+    
+      .BottomPartForm {
+        display: flex;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+    
+      .ButtonORRegistartion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+    
+      .ButtonORRegistartion .ant-btn {
+        margin-bottom: 10px;
+      }
+       
+    .ant-row.ant-form-item-row {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .ant-col.ant-col-16.ant-col-offset-8 {
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+  }
+  /* Медиа-запросы для устройств с максимальной шириной 575px (мобильные) */
+  @media (max-width: 575px) {
+    .ant-form-item {
+      
+      max-width: 100%;
+    }
+  
+    .ant-form-item-control {
+      
+      max-width: 100%;
+    }
+  }

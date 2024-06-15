@@ -11,7 +11,11 @@ from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 import logging
 logger = logging.getLogger(__name__)
+<<<<<<< HEAD
 #Представление для того, чтобы bookId загрузился в localStorage в React(делаем доступным вовне админки book_id)
+=======
+#Представление для того, чтобы bookId загрузился в localStorage в React
+>>>>>>> backup-branch
 class BookView(generics.RetrieveAPIView):
     permission_classes = [AllowAny]
     queryset = Book.objects.all().order_by('id')
@@ -77,8 +81,12 @@ class BookPagination(APIView):
         serializer = BookSerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
 
+<<<<<<< HEAD
 #Представление для чтения пдф файла книг и преоброзования в текст.
 #Скачать PyPDF2
+=======
+#Представление для чтения пдф файла книг и преоброзования в текст(планируется в будущем).
+>>>>>>> backup-branch
 '''
 import PyPDF2
 
@@ -90,7 +98,11 @@ with open('your_pdf_file.pdf', 'rb') as file:
         text = page.extractText()
         print(text)
 '''
+<<<<<<< HEAD
 #Представление для пагинации текста книги(?)
+=======
+
+>>>>>>> backup-branch
     
 
 

@@ -10,7 +10,12 @@ from marketplace.models import Book
 from .serializers import *
 from users.models import *
 from rest_framework import generics
+<<<<<<< HEAD
 #ПокупкаКниги
+=======
+
+# Представление для аренды книги
+>>>>>>> backup-branch
 class PurchaseView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, book_id):
@@ -19,24 +24,37 @@ class PurchaseView(APIView):
 
         # Создаем запись о покупке
         user_book = UserBook.objects.create(user=user, book=book)
+<<<<<<< HEAD
 
         # Дополнительные действия, например, отправка уведомлений и т.д.
 
         return Response({'message': 'Purchase successful'}, status=status.HTTP_201_CREATED)
 
 #Проверка существования пользователя, отрыв книги у первого пользователя, прикрепление ко второму пользователю   
+=======
+        return Response({'message': 'Purchase successful'}, status=status.HTTP_201_CREATED)
+
+# Представление для передачи книги другу 
+# Проверка существования пользователя, отрыв книги у первого пользователя, прикрепление ко второму пользователю  
+>>>>>>> backup-branch
 class TransferBookView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         # Получаем данные из запроса
         giver_user_id = request.data.get('giver_user_id')
+<<<<<<< HEAD
         #receiver_user_id = request.data.get('receiver_user_id')
+=======
+>>>>>>> backup-branch
         receiver_user_email = request.data.get('receiver_user_email')
         book_id = request.data.get('book_id')
 
         # Получаем объекты или возвращаем 404, если не найдены
         giver_user = get_object_or_404(User, id=giver_user_id)
+<<<<<<< HEAD
         #receiver_user = get_object_or_404(User, id=receiver_user_id)
+=======
+>>>>>>> backup-branch
         receiver_user = get_object_or_404(User, email=receiver_user_email)
         book = get_object_or_404(Book, id=book_id)
 
@@ -65,14 +83,22 @@ class PersonalLibraryView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
    
     def get_queryset(self):
+<<<<<<< HEAD
         # Возвращает все книги и передачи для текущего пользователя
+=======
+        # Возвращаем все книги и передачи для текущего пользователя
+>>>>>>> backup-branch
         user = self.request.user
         user_books = UserBook.objects.filter(user=user)
         book_transfers = BookTransfer.objects.filter(giver_user=user) | BookTransfer.objects.filter(receiver_user=user)
         return (user_books, book_transfers)
     
     def list(self, request, *args, **kwargs):
+<<<<<<< HEAD
         # Получение книг и передач
+=======
+        # Получаем  арендованные книги и переданные книги
+>>>>>>> backup-branch
         user_books, book_transfers = self.get_queryset()
 
         # Сериализация данных
@@ -85,7 +111,11 @@ class PersonalLibraryView(generics.ListAPIView):
             'book_transfers': book_transfers_serializer.data
         })
     
+<<<<<<< HEAD
 #Добавление в список желаемого
+=======
+# Прдеставление для добавления книги в список желаемого
+>>>>>>> backup-branch
 class WishListView(APIView):
     permission_classes=[IsAuthenticated]
     def post(self, request, book_id):
@@ -103,12 +133,20 @@ class WishListView(APIView):
             # Если такая запись уже существует, возвращаем ошибку
             return Response({'error': 'This book is already in your wishlist'}, status=status.HTTP_409_CONFLICT)
 
+<<<<<<< HEAD
 #Представление, чтобы показать пользователю какие книги у него в списке желаний
+=======
+# Представление, чтобы показать пользователю какие книги у него в списке желаний
+>>>>>>> backup-branch
 class WishListLibraryView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
    
     def get_queryset(self):
+<<<<<<< HEAD
         # Возвращает все книги списка желаний текущего пользователя
+=======
+        # Возвращаем все книги списка желаний текущего пользователя
+>>>>>>> backup-branch
         user = self.request.user
         wish_books = WishBook.objects.filter(user=user).select_related('book')
         return (wish_books)
@@ -121,14 +159,25 @@ class WishListLibraryView(generics.ListAPIView):
         # Объединение данных в один ответ
         return Response({'wish_books':  wish_books_serializer.data })
 
+<<<<<<< HEAD
 #Сохранение уведомлений
+=======
+# Представление для сохранения уведомлений
+>>>>>>> backup-branch
 class NotificationViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = NotificationSerializer
 
     def get_queryset(self):
+<<<<<<< HEAD
         return Notification.objects.filter(recipient=self.request.user, read=False)
 
+=======
+        #Возвращаем все уведомления пользователю
+        return Notification.objects.filter(recipient=self.request.user, read=False)
+    
+    #Обновляем уведомления
+>>>>>>> backup-branch
     def partial_update(self, request, pk=None):
         notification = self.get_object()
         notification.read = True

@@ -7,7 +7,11 @@ import logging
 logger = logging.getLogger(__name__)
 @shared_task
 def return_books():
+<<<<<<< HEAD
     # Найти все передачи книг, которые должны быть возвращены
+=======
+    # Найдем все передачи книг, которые должны быть возвращены
+>>>>>>> backup-branch
     transfers = BookTransfer.objects.filter(
         transferred_at__lte=timezone.now() - timedelta(days=7),
         status='transferred'
@@ -23,7 +27,11 @@ def return_books():
             # Если запись отсутствует, логируем это
             logger.error(f"UserBook for {transfer.receiver_user.email} and book {transfer.book.title} does not exist. Cannot delete.")
 
+<<<<<<< HEAD
         # Создание записи о книге у giver_user, если её нет
+=======
+        # Создаем записи о книге у giver_user, если её нет
+>>>>>>> backup-branch
         if not UserBook.objects.filter(user=transfer.giver_user, book=transfer.book).exists():
             UserBook.objects.create(user=transfer.giver_user, book=transfer.book)
         
