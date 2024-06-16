@@ -1,5 +1,5 @@
-# ShareBooks
-ShareBooks is an online library platform that allows users to share books with one another.
+# ShareBook
+ShareBook is an online library platform that allows users to share books with one another.
 
 
 ## Stack
@@ -59,7 +59,7 @@ python manage.py runserver
 ### Frontend
 
 ```
-cd sharebooks-design
+cd sharebook-design/sharebook-design
 ```
 
 ```
@@ -79,16 +79,14 @@ npm start
 <summary><h2>Project Structure</h2></summary>
 
 ```
-ShareBooks/
+ShareBook/
 ├── ShareBook/ # Backend part of site
 │ ├── init.py
 │ ├── asgi.py
 │ ├── settings.py # Settings of Django app
+| ├── celery.py 
 │ ├── urls.py
 │ └── wsgi.py
-├── db/
-│ ├── password.txt
-│ └── password.txt.txt
 ├── marketplace/ # Django app for the marketplace functionality
 │ ├── init.py
 │ ├── admin.py
@@ -99,7 +97,6 @@ ShareBooks/
 │ └── views.py
 ├── media/
 │ ├── books/
-│  └── Don_Quixote.jpg
 │ 
 ├── myBooks/ # Django app for user's book collections, including models and API serializers
 │ ├── init.py
@@ -108,6 +105,7 @@ ShareBooks/
 │ ├── models.py
 │ ├── serializers.py
 │ ├── tests.py
+| ├── tasks.py
 │ ├── urls.py
 │ └── views.py
 ├── nginx/ # Contains Nginx configuration files for web server setup
@@ -126,88 +124,108 @@ ShareBooks/
 ├── .dockerignore
 ├── Dockerfile # Django settings for Docker
 ├── README.md
-├── compose.yaml # Project settings for Docker
+├── docker-compose.yaml # Project settings for Docker
 ├── manage.py
 └── requirements.txt # Specifies Python package dependencies for the project
-├── sharebooks-design/ # Frontend part of site
-│ ├── build/ # Compiled and ready-to-deploy frontend static files
-│ │ ├── static/
-│ │ │ ├── css/
-│ │ │ ├── js/
-│ │ │ └── media/
-│ │ ├── asset-manifest.json
-│ │ ├── favicon.ico
-│ │ ├── index.html
-│ │ ├── logo.png
-│ │ ├── manifest.json
-│ │ └── robots.txt
-│ ├── public/ # Contains the static files used by the React app before it's built
-│ │ ├── favicon.ico
-│ │ ├── index.html
-│ │ ├── logo.png
-│ │ ├── manifest.json
-│ │ └── robots.txt
-│ ├── src/ # Source files for the React application, including components and pages
-│ │ ├── assets/
-│ │ │ ├── css/
-│ │ │ │ ├── Cards.css
-│ │ │ │ ├── Filter.css
-│ │ │ │ ├── Header.css
-│ │ │ │ ├── ModalForm.css
-│ │ │ │ ├── ReadingPage.css
-│ │ │ │ ├── SearchBar.css
-│ │ │ │ ├── login.css
-│ │ │ │ └── marketplace.css
-│ │ │ ├── fonts/
-│ │ │ │ └── Baskervville/
-│ │ │ └── img/
-│ │ ├── components/
-│ │ │ ├── About_us.jsx
-│ │ │ ├── Accordion.jsx
-│ │ │ ├── Cards.jsx
-│ │ │ ├── Cards2.jsx
-│ │ │ ├── Contacts.jsx
-│ │ │ ├── Filter.jsx
-│ │ │ ├── Footer.jsx
-│ │ │ ├── Header.jsx
-│ │ │ ├── Intro.jsx
-│ │ │ ├── ModalForm.jsx
-│ │ │ ├── Pagination.jsx
-│ │ │ ├── PopularBooks.jsx
-│ │ │ ├── Profile.jsx
-│ │ │ ├── ProgressBar.jsx
-│ │ │ ├── Registration.jsx
-│ │ │ ├── Search.jsx
-│ │ │ ├── allbooks.jsx
-│ │ │ ├── bookItem.jsx
-│ │ │ ├── logIn.jsx
-│ │ │ ├── recentlyRead.jsx
-│ │ │ └── signIn.jsx
-│ │ ├── pages/
-│ │ │ ├── Contacts.jsx
-│ │ │ ├── FAQ.jsx
-│ │ │ ├── HomePage.jsx
-│ │ │ ├── OurProjects.jsx
-│ │ │ ├── PersonalLibrary.jsx
-│ │ │ ├── ProfileUser.jsx
-│ │ │ ├── PurchasePage.jsx
-│ │ │ ├── ReadingPage.jsx
-│ │ │ ├── Settings.jsx
-│ │ │ ├── SuccessPage.jsx
-│ │ │ └── marketplace.jsx
-│ │ ├── App.css
-│ │ ├── App.js # Root React component
-│ │ ├── App.test.js
-│ │ ├── index.css
-│ │ ├── index.js # Entry point for the React application
-│ │ ├── logo.svg
-│ │ ├── reportWebVitals.js
-│ │ └── setupTests.js
-│ ├── .gitignore
-│ ├── Dockerfile # Docker settings for React
-│ ├── README.md
-│ ├── package-lock.json
-│ └── package.json
+├── sharebook-design
+│   └── sharebook-design
+│       ├── public
+│       │   ├── favicon.ico
+│       │   ├── index.html
+│       │   ├── logo192.png
+│       │   ├── logo512.png
+│       │   ├── manifest.json
+│       │   ├── pdf.worker.mjs
+│       │   └── robots.txt
+│       ├── src
+│       │   ├── assets
+│       │   │   ├── css
+│       │   │   │   ├── Cards.css
+│       │   │   │   ├── Contacts.css
+│       │   │   │   ├── FAQ.css
+│       │   │   │   ├── Filter.css
+│       │   │   │   ├── Footer.css
+│       │   │   │   ├── Header.css
+│       │   │   │   ├── HomePage.css
+│       │   │   │   ├── ModalForm.css
+│       │   │   │   ├── OurProjectPage.css
+│       │   │   │   ├── PaymentForm.css
+│       │   │   │   ├── PersonalLibrary.css
+│       │   │   │   ├── ReadingPage.css
+│       │   │   │   ├── ResetPassword.css
+│       │   │   │   ├── SearchBar.css
+│       │   │   │   ├── SuccessPage.css
+│       │   │   │   ├── UserAgreement.css
+│       │   │   │   ├── login.css
+│       │   │   │   └── marketplace.css
+│       │   │   ├── fonts
+│       │   │   │   └── Baskervville
+│       │   │   │       ├── Baskervville-Italic.ttf
+│       │   │   │       ├── Baskervville-Regular.ttf
+│       │   │   │       ├── COPYRIGHT.txt
+│       │   │   │       ├── LICENSE.txt
+│       │   │   │       └── README.txt
+│       │   │   └── img
+│       │   ├── components
+│       │   │   ├── About_us.jsx
+│       │   │   ├── Accordion.jsx
+│       │   │   ├── Cards.jsx
+│       │   │   ├── Cards2.jsx
+│       │   │   ├── Contacts.jsx
+│       │   │   ├── Filter.jsx
+│       │   │   ├── Footer.jsx
+│       │   │   ├── Header.jsx
+│       │   │   ├── Intro.jsx
+│       │   │   ├── MobileHeader.jsx
+│       │   │   ├── ModalFormPurchase.jsx
+│       │   │   ├── ModalFormTransfer.jsx
+│       │   │   ├── Pagination.jsx
+│       │   │   ├── PopularBooks.jsx
+│       │   │   ├── Profil.jsx
+│       │   │   ├── ProgressBar.jsx
+│       │   │   ├── Project.jsx
+│       │   │   ├── Registration.jsx
+│       │   │   ├── RenderPDF.jsx
+│       │   │   ├── ResultSearchBooks.jsx
+│       │   │   ├── Search.jsx
+│       │   │   ├── UserAgreement.jsx
+│       │   │   ├── WishCards.jsx
+│       │   │   ├── allbooks.jsx
+│       │   │   ├── bookItem.jsx
+│       │   │   ├── logIn.jsx
+│       │   │   └── recentlyRead.jsx
+│       │   ├── context
+│       │   │   ├── FiltersContext.js
+│       │   │   └── searchContext.js
+│       │   ├── pages
+│       │   │   ├── Contacts.jsx
+│       │   │   ├── FAQ.jsx
+│       │   │   ├── HomePage.jsx
+│       │   │   ├── OurProjects.jsx
+│       │   │   ├── PaymentPage.jsx
+│       │   │   ├── PersonalLibrary.jsx
+│       │   │   ├── ProfilUser.jsx
+│       │   │   ├── PurchasePage.jsx
+│       │   │   ├── ReadingPage.jsx
+│       │   │   ├── ResetPasswordPage.jsx
+│       │   │   ├── SearchResultPage.jsx
+│       │   │   ├── Settings.jsx
+│       │   │   ├── SuccessPage.jsx
+│       │   │   ├── WishPage.jsx
+│       │   │   └── marketplace.jsx
+│       │   ├── App.css
+│       │   ├── App.js
+│       │   ├── App.test.js
+│       │   ├── index.css
+│       │   ├── index.js
+│       │   ├── logo.svg
+│       │   ├── reportWebVitals.js
+│       │   └── setupTests.js
+│       ├── .env
+│       ├── .gitignore
+│       ├── README.md
+│       ├── package-lock.json
+│       └── package.json
 ├── README.md
 └── docker-compose.yml
 ```
