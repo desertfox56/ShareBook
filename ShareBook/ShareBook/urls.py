@@ -19,11 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-<<<<<<< HEAD
-    #Админка:http://localhost:8000/api/admin/
-=======
     # Админ-панель: http://share-book.ru/api/admin/ !
->>>>>>> backup-branch
     path('api/admin/', admin.site.urls),
     path('api/users/',include('users.urls')),
     path('api/marketplace/',include('marketplace.urls')),

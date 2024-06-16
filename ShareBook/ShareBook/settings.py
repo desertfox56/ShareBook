@@ -21,20 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
-SECRET_KEY = config('SECRET_KEY')
-=======
 SECRET_KEY = config('SECRET_KEY') #Храним секретный ключ в .env файле 
->>>>>>> backup-branch
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['share-book.ru', 'www.share-book.ru','ftp.share-book.ru.','mail.share-book.ru.','smtp.share-book.ru.','pop.share-book.ru.', 'localhost','127.0.0.1']
-=======
 ALLOWED_HOSTS = ['*']
->>>>>>> backup-branch
 
 
 # Application definition
@@ -70,10 +62,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
-<<<<<<< HEAD
-=======
     #Пагинация
->>>>>>> backup-branch
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
@@ -114,19 +103,13 @@ DEFAULT_CHARSET = 'utf-8'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-<<<<<<< HEAD
-=======
 # База данных
->>>>>>> backup-branch
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ShareBook',
         'USER': 'postgres',
-<<<<<<< HEAD
-=======
         #Храним пароль от Базы данных в .env файле
->>>>>>> backup-branch
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'db',
         'PORT': '5432',
@@ -182,13 +165,9 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SIMPLE_JWT = {
-<<<<<<< HEAD
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=10),
-=======
     # Время жизни токена
     "ACCESS_TOKEN_LIFETIME": timedelta(days=10),
     # Время жизни токена
->>>>>>> backup-branch
     "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
@@ -233,18 +212,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-<<<<<<< HEAD
-LOGIN_URL = '/users/api/token/'  
-
-CORS_ALLOW_CREDENTIALS = True
-
-
-CORS_ALLOWED_ORIGINS = [
-    "http://share-book.ru/",
-    "https://www.share-book.ru",
-    # "http://localhost:3000",  # React порт
-    # "http://localhost:8000",  # Django порт
-=======
 #Адрес Авторизации
 LOGIN_URL = '/users/api/token/'  
 
@@ -255,7 +222,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://share-book.ru",
     "https://www.share-book.ru",
     
->>>>>>> backup-branch
 ]
 
 CORS_ALLOW_METHODS = [
@@ -278,10 +244,7 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
-<<<<<<< HEAD
-=======
 # Логирование
->>>>>>> backup-branch
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -292,16 +255,6 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-<<<<<<< HEAD
-        'level': 'INFO',
-    },
-}
-
-#Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_PORT = 587  # для использования TLS, 465 для SSL
-=======
         'level': 'DEBUG',
     },
 }
@@ -310,17 +263,12 @@ EMAIL_PORT = 587  # для использования TLS, 465 для SSL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  
 EMAIL_PORT = 587  # для использования TLS
->>>>>>> backup-branch
 EMAIL_USE_TLS = True  
 EMAIL_USE_SSL = False  
 EMAIL_HOST_USER = 'alexej.ivanov1084736@gmail.com'
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-<<<<<<< HEAD
-# Celery Configuration
-=======
 # Celery Настройки
->>>>>>> backup-branch
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']

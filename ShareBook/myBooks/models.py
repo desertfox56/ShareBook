@@ -9,11 +9,7 @@ class UserBook(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-<<<<<<< HEAD
-        unique_together = ('book', 'user')  # Adding a unique constraint
-=======
         unique_together = ('book', 'user')  #unique constraint
->>>>>>> backup-branch
 
 class BookTransfer(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -32,11 +28,7 @@ class WishBook(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-<<<<<<< HEAD
-        unique_together = ('book', 'user')  # Adding a unique constraint
-=======
         unique_together = ('book', 'user')  #unique constraint
->>>>>>> backup-branch
 
 class Notification(models.Model):
     TYPE_CHOICES = (

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# utils/notifications.py
-=======
->>>>>>> backup-branch
 from .models import Notification
 
 def send_notification(user, message, type):
