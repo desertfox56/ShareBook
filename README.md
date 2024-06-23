@@ -1,5 +1,5 @@
 # ShareBook
-ShareBook is an online library platform that allows users to share books with one another.
+ShareBook is a Russian-language online library that allows users to rent books, transfer them to friends, and read books directly on the website. 
 
 
 ## Stack
@@ -52,6 +52,18 @@ pip install -r requirements.txt
 ```
 
 ```
+python manage.py makemigrations
+```
+
+```
+python manage.py migrate
+```
+
+```
+python manage.py collectstatic
+```
+
+```
 python manage.py runserver
 ```
 
@@ -67,7 +79,7 @@ npm install
 ```
 
 ```
-npm start
+npm run build
 ```
 
 
@@ -232,3 +244,13 @@ ShareBook/
   
 </details>
 
+## Ownership and Licensing
+This project is licensed under the MIT License.
+
+### Ownership:
+The ShareBook platform, including its code and content, is owned by Farid Aziev.
+
+### Licensing:
+
+MIT License: The code in this repository is open-source and can be used, modified, and distributed under the terms of the MIT License. The full license text can be found in the LICENSE file in the repository.
+For any questions or additional information, please contact me at [farid.aziev51@gmail.com](mailto:farid.aziev51@gmail.com).
